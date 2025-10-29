@@ -4,23 +4,13 @@
 
 /* Base tweaks retained while migrating to Tailwind */
 body {
-  @apply font-primary text-[#333333] bg-[#f8f9fa] leading-relaxed;
+  @apply m-0 font-primary text-[#333333] bg-[#f8f9fa] leading-relaxed;
 }
 .container {
   @apply max-w-[1200px] mx-auto px-5;
 }
 
-/* Temporary CSS variables to support pages not yet fully migrated to Tailwind */
-:root {
-  --primary-color: #1a1a2e;
-  --secondary-color: #16213e;
-  --accent-color: #0f3460;
-  --highlight: #e94560;
-  --gold: #ffd700;
-  --text-light: #ffffff;
-  --text-dark: #333333;
-  --bg-light: #f8f9fa;
-}
+/* Colors are provided via Tailwind theme; no CSS variables needed */
 
 /* ========== LANGUAGE SWITCHER ========== */
 /* language switcher now uses Tailwind classes in markup */
@@ -36,86 +26,9 @@ body {
 
 /* countdown using Tailwind in markup */
 
-/* ========== ABOUT SECTION ========== */
-.about {
-  padding: 80px 20px;
-}
+/* About page now uses Tailwind utilities */
 
-.about h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-  color: var(--primary-color);
-}
-
-.about h3 {
-  color: var(--accent-color);
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-}
-
-.about-content {
-  display: grid;
-  gap: 40px;
-}
-
-.mission-statement p,
-.festival-info,
-.about-nido {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 0.3);
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.info-item {
-  padding: 20px;
-  background: var(--bg-light);
-  border-radius: 8px;
-}
-
-.info-item h4 {
-  color: var(--highlight);
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.info-item p {
-  color: var(--text-dark);
-}
-
-/* ========== SUBMISSION SECTION ========== */
-.submission {
-  padding: 80px 20px;
-  background: white;
-}
-
-.submission h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: var(--primary-color);
-}
-
-.form-container {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.form-container iframe {
-  border: none;
-  border-radius: 8px;
-}
+/* Submission page now uses Tailwind utilities */
 
 /* footer will be styled via Tailwind */
 
@@ -132,26 +45,7 @@ body.menu-open {
   @apply text-[#333333] italic opacity-80;
 }
 
-/* ========== TIMELINE SECTION ========== */
-.timeline,
-.videos,
-.judges {
-  padding: 80px 20px;
-}
-
-.timeline,
-.videos {
-  margin-bottom: 40vh;
-}
-
-.timeline h2,
-.videos h2,
-.judges h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: var(--primary-color);
-}
+/* Timeline, Videos, Judges pages now use Tailwind */
 
 /* ========== RESPONSIVE DESIGN ========== */
 /* mobile-specific sizes now via Tailwind responsive utilities */
