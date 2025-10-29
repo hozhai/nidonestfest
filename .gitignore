@@ -1,0 +1,16 @@
+# Node
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# SvelteKit
+.svelte-kit/
+.vite/
+build/
+.DS_Store
+
+# Env
+.env
+.env.*

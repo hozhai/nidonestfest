@@ -1,0 +1,73 @@
+{
+  "brand": {
+    "title": "Festival de Cine Nido 2025"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre",
+    "submit": "Enviar película",
+    "judges": "Jueces",
+    "timeline": "Programa",
+    "videos": "Videos"
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Español"
+  },
+  "home": {
+    "hero": {
+      "title": "Bienvenidos al Primer Festival Anual de Cine Nido",
+      "subtitle": "Celebrando cineastas emergentes y sus visiones creativas",
+      "cta_submit": "Envía tu película",
+      "cta_learn": "Conocer más"
+    },
+    "countdown": {
+      "months": "Meses",
+      "weeks": "Semanas",
+      "days": "Días",
+      "hours": "Horas",
+      "minutes": "Minutos",
+      "seconds": "Segundos",
+      "subtitle": "Hasta el Festival de Cine Nido 2026"
+    }
+  },
+  "about": {
+    "title": "Sobre el Festival",
+    "mission_title": "Declaración de Misión",
+    "mission_text": "El Festival de Cine Nido está dedicado a mostrar películas cortas innovadoras de cineastas emergentes de todo el mundo. Proporcionamos una plataforma para que las voces creativas sean escuchadas y celebradas, fomentando una comunidad de artistas que empujan los límites de la narración a través del cine.",
+    "info_title": "Información del Festival",
+    "info": {
+      "duration_title": "Duración de Películas",
+      "duration_value": "3-25 minutos",
+      "location_title": "Ubicación de Proyección",
+      "location_value": "Proyecciones en vivo en Nido",
+      "features_title": "Características Especiales",
+      "features_value": "Oradores en vivo y paneles de discusión",
+      "year_title": "Año",
+      "year_value": "¡Primer Festival Anual - Gran Apertura!"
+    },
+    "about_nido_title": "Sobre Nido",
+    "about_nido_pending": "Información sobre Nido próximamente..."
+  },
+  "judges": {
+    "title": "Conoce a los Jueces",
+    "pending": "Información del juez próximamente..."
+  },
+  "submission": {
+    "title": "Envía tu película"
+  },
+  "timeline": {
+    "title": "Programa del Festival",
+    "pending": "Programa de eventos próximamente..."
+  },
+  "videos": {
+    "title": "Videos Destacados",
+    "pending": "Contenido de video próximamente..."
+  },
+  "footer": {
+    "tagline": "Celebrando cineastas emergentes de todo el mundo",
+    "quick_links": "Enlaces rápidos",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados."
+  }
+}

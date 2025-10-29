@@ -1,0 +1,73 @@
+{
+  "brand": {
+    "title": "Nido Film Festival 2025"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "submit": "Submit Film",
+    "judges": "Judges",
+    "timeline": "Timeline",
+    "videos": "Videos"
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Español"
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to the First Annual Nido Film Festival",
+      "subtitle": "Celebrating emerging filmmakers and their creative visions",
+      "cta_submit": "Submit Your Film",
+      "cta_learn": "Learn More"
+    },
+    "countdown": {
+      "months": "Months",
+      "weeks": "Weeks",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "subtitle": "Until the Nido Film Festival 2026"
+    }
+  },
+  "about": {
+    "title": "About the Festival",
+    "mission_title": "Mission Statement",
+    "mission_text": "The Nido Film Festival is dedicated to showcasing innovative short films from emerging filmmakers worldwide. We provide a platform for creative voices to be heard and celebrated, fostering a community of artists who push the boundaries of storytelling through film.",
+    "info_title": "Festival Information",
+    "info": {
+      "duration_title": "Film Duration",
+      "duration_value": "3-25 minutes",
+      "location_title": "Screening Location",
+      "location_value": "Live screenings at Nido",
+      "features_title": "Special Features",
+      "features_value": "Live speakers and panel discussions",
+      "year_title": "Year",
+      "year_value": "First Annual Festival - Grand Opening!"
+    },
+    "about_nido_title": "About Nido",
+    "about_nido_pending": "Information about Nido coming soon..."
+  },
+  "judges": {
+    "title": "Meet the Judges",
+    "pending": "Judge information coming soon..."
+  },
+  "submission": {
+    "title": "Submit Your Film"
+  },
+  "timeline": {
+    "title": "Festival Timeline",
+    "pending": "Timeline of events coming soon..."
+  },
+  "videos": {
+    "title": "Featured Videos",
+    "pending": "Video content coming soon..."
+  },
+  "footer": {
+    "tagline": "Celebrating emerging filmmakers worldwide",
+    "quick_links": "Quick Links",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  }
+}
