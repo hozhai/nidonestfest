@@ -39,7 +39,7 @@ body.menu-open {
 
 /* optional: keep .pending-box minimal for pages not yet converted */
 .pending-box {
-  @apply bg-white/10 p-4 rounded border-l-4 border-gold;
+  @apply bg-white/10 p-4 rounded border-l-4 border-accent;
 }
 .pending-box p {
   @apply text-[#333333] italic opacity-80;

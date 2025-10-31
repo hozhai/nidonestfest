@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { t } from '$lib/i18n/i18n.js';
+  import image from '$lib/public/bg.jpg?enhanced';
 
   let months = 0,
     weeks = 0,
@@ -36,9 +37,12 @@
 <!-- Home Section / Hero -->
 <section
   id="home"
-  class="bg-gradient-to-br from-primary to-accent text-white text-center relative overflow-hidden py-24 px-5"
+  class="h-[80vh] text-white text-center relative overflow-hidden py-24 px-5 flex justify-center items-center"
 >
-  <div class="max-w-3xl mx-auto relative z-10">
+  <enhanced:img src={image} alt="Background" class="absolute top-0 left-0 w-screen" />
+  <div
+    class="max-w-3xl mx-auto relative z-10 bg-black bg-opacity-50 px-20 py-10 rounded-xl backdrop-blur-lg"
+  >
     <h2 class="text-4xl md:text-5xl font-bold mb-4">{$t('home.hero.title')}</h2>
     <p class="text-lg md:text-xl opacity-90 mb-8">{$t('home.hero.subtitle')}</p>
     <div class="flex flex-wrap justify-center gap-4">
@@ -57,38 +61,42 @@
 </section>
 
 <!-- Countdown Timer -->
-<section class="bg-bgdark text-white py-14 px-5 text-center">
+<section class="bg-white text-black py-14 px-5 text-center">
   <div class="container">
     <div class="flex justify-center gap-5 flex-wrap">
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
         <span class="block text-3xl md:text-4xl font-bold text-gold" id="months">{months}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider"
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
           >{$t('home.countdown.months')}</span
         >
       </div>
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
         <span class="block text-3xl md:text-4xl font-bold text-gold" id="weeks">{weeks}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider">{$t('home.countdown.weeks')}</span
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
+          >{$t('home.countdown.weeks')}</span
         >
       </div>
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
         <span class="block text-3xl md:text-4xl font-bold text-gold" id="days">{days}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider">{$t('home.countdown.days')}</span>
-      </div>
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
-        <span class="block text-3xl md:text-4xl font-bold text-gold" id="hours">{hours}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider">{$t('home.countdown.hours')}</span
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
+          >{$t('home.countdown.days')}</span
         >
       </div>
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
+        <span class="block text-3xl md:text-4xl font-bold text-gold" id="hours">{hours}</span>
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
+          >{$t('home.countdown.hours')}</span
+        >
+      </div>
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
         <span class="block text-3xl md:text-4xl font-bold text-gold" id="minutes">{minutes}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider"
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
           >{$t('home.countdown.minutes')}</span
         >
       </div>
-      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[10px_10px_0_0_rgba(0,0,0,0.3)]">
+      <div class="bg-primary p-5 rounded-lg min-w-[90px] shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
         <span class="block text-3xl md:text-4xl font-bold text-gold" id="seconds">{seconds}</span>
-        <span class="block text-xs mt-2 uppercase tracking-wider"
+        <span class="block text-xs mt-2 uppercase tracking-wider text-white"
           >{$t('home.countdown.seconds')}</span
         >
       </div>

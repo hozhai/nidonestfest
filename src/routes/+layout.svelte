@@ -37,62 +37,60 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="sticky top-10 z-50 bg-primary shadow">
+  <nav class="fixed w-full backdrop-blur-xl top-10 z-50 bg-primary shadow bg-opacity-70">
     <div class="container flex items-center justify-between py-4">
       <div class="text-white text-xl font-bold">{$t('brand.title')}</div>
 
       <!-- Desktop Menu -->
       <ul class="hidden md:flex list-none gap-8 items-center">
-        {#key $page.url.pathname}
-          <li>
-            <a
-              href="/"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname === '/'}
-              class:font-bold={$page.url.pathname === '/'}>{$t('nav.home')}</a
-            >
-          </li>
-          <li>
-            <a
-              href="/about"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname.startsWith('/about')}
-              class:font-bold={$page.url.pathname.startsWith('/about')}>{$t('nav.about')}</a
-            >
-          </li>
-          <li>
-            <a
-              href="/submission"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname.startsWith('/submission')}
-              class:font-bold={$page.url.pathname.startsWith('/submission')}>{$t('nav.submit')}</a
-            >
-          </li>
-          <li>
-            <a
-              href="/judges"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname.startsWith('/judges')}
-              class:font-bold={$page.url.pathname.startsWith('/judges')}>{$t('nav.judges')}</a
-            >
-          </li>
-          <li>
-            <a
-              href="/timeline"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname.startsWith('/timeline')}
-              class:font-bold={$page.url.pathname.startsWith('/timeline')}>{$t('nav.timeline')}</a
-            >
-          </li>
-          <li>
-            <a
-              href="/videos"
-              class="text-white hover:text-highlight transition"
-              class:text-highlight={$page.url.pathname.startsWith('/videos')}
-              class:font-bold={$page.url.pathname.startsWith('/videos')}>{$t('nav.videos')}</a
-            >
-          </li>
-        {/key}
+        <li>
+          <a
+            href="/"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname === '/'}
+            class:font-bold={$page.url.pathname === '/'}>{$t('nav.home')}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname.startsWith('/about')}
+            class:font-bold={$page.url.pathname.startsWith('/about')}>{$t('nav.about')}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/submission"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname.startsWith('/submission')}
+            class:font-bold={$page.url.pathname.startsWith('/submission')}>{$t('nav.submit')}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/judges"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname.startsWith('/judges')}
+            class:font-bold={$page.url.pathname.startsWith('/judges')}>{$t('nav.judges')}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/timeline"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname.startsWith('/timeline')}
+            class:font-bold={$page.url.pathname.startsWith('/timeline')}>{$t('nav.timeline')}</a
+          >
+        </li>
+        <li>
+          <a
+            href="/videos"
+            class="text-white hover:text-highlight transition"
+            class:text-highlight={$page.url.pathname.startsWith('/videos')}
+            class:font-bold={$page.url.pathname.startsWith('/videos')}>{$t('nav.videos')}</a
+          >
+        </li>
       </ul>
 
       <!-- Hamburger -->
@@ -154,15 +152,15 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-primary text-white pt-12 pb-6">
+  <footer class="bg-primary text-white pt-12 pb-6 border-t-4 border-t-accent">
     <div class="container">
       <div class="grid gap-10 md:grid-cols-3 mb-6">
         <div>
-          <h3 class="text-gold mb-3 text-xl font-semibold">{$t('brand.title')}</h3>
+          <h3 class="text-white mb-3 text-xl font-semibold">{$t('brand.title')}</h3>
           <p>{$t('footer.tagline')}</p>
         </div>
         <div>
-          <h4 class="text-gold mb-3 text-lg font-semibold">{$t('footer.quick_links')}</h4>
+          <h4 class="text-white mb-3 text-lg font-semibold">{$t('footer.quick_links')}</h4>
           <ul class="space-y-2">
             <li><a class="hover:text-highlight" href="/about">{$t('nav.about')}</a></li>
             <li><a class="hover:text-highlight" href="/submission">{$t('nav.submit')}</a></li>
@@ -171,7 +169,7 @@
           </ul>
         </div>
         <div>
-          <h4 class="text-gold mb-3 text-lg font-semibold">{$t('footer.contact')}</h4>
+          <h4 class="text-white mb-3 text-lg font-semibold">{$t('footer.contact')}</h4>
           <div class="pending-box">
             <p>
               <a class="text-white hover:text-highlight" href="mailto:jonas.hekel@students.nido.cl"

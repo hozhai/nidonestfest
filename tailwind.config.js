@@ -18,10 +18,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1a1a2e',
-        secondary: '#16213e',
-        accent: '#0f3460',
-        highlight: '#e94560',
+        primary: '#002365',
+        secondary: '#ffffff',
+        accent: '#b61d2c',
+        highlight: '#b61d2c',
         gold: '#ffd700',
         bgdark: '#0d1929'
       },
