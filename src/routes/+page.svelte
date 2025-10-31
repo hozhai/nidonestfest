@@ -34,6 +34,12 @@
   });
 </script>
 
+<svelte:head>
+  <title>
+    {$t('nav.home')} | Nido Nest Fest
+  </title>
+</svelte:head>
+
 <!-- Home Section / Hero -->
 <section
   id="home"
