@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply m-0 font-primary text-[#333333] bg-[#f8f9fa] leading-relaxed;
+}
+
+.container {
+  @apply max-w-[1200px] mx-auto px-5;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.pending-box {
+  @apply bg-white/10 p-4 rounded border-l-4 border-accent;
+}
+
+.pending-box p {
+  @apply text-[#333333] italic opacity-80;
+}

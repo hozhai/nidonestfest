@@ -1,26 +1,41 @@
-// ESLint flat config for Svelte + JS
-import js from '@eslint/js';
-import svelte from 'eslint-plugin-svelte';
+import globals from 'globals';
+import pluginVue from 'eslint-plugin-vue';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  { ignores: ['.svelte-kit/**', 'build/**', 'node_modules/**', 'legacy/**'] },
-  js.configs.recommended,
-  ...svelte.configs['flat/recommended'],
   {
-    files: ['**/*.svelte', '**/*.js'],
+    ignores: ['.nuxt/**', '.output/**', 'dist/**', 'node_modules/**']
+  },
+  {
+    files: ['**/*.vue'],
     languageOptions: {
+      parser: pluginVue.parsers['vue-eslint-parser'],
+      parserOptions: {
+        ecmaVersion: 2023,
+        sourceType: 'module'
+      },
       globals: {
-        document: 'readonly',
-        window: 'readonly',
-        localStorage: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        navigator: 'readonly'
+        ...globals.browser,
+        ...globals.node
+      }
+    },
+    plugins: { vue: pluginVue },
+    rules: {
+      ...pluginVue.configs['vue3-recommended'].rules,
+      'vue/multi-word-component-names': 'off'
+    }
+  },
+  {
+    files: ['**/*.{js,ts}'],
+    languageOptions: {
+      ecmaVersion: 2023,
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.node
       }
     },
     rules: {
-      // allow empty catch blocks for safe storage access
       'no-empty': ['error', { allowEmptyCatch: true }]
     }
   }
