@@ -1,11 +1,27 @@
 <template>
-  <section class="h-screen p-20">
-    <ui-blur-reveal>
-      <h1 class="font-secondary font-black text-9xl italic mt-20">{{ t("home.hero.title.welcome") }}</h1>
-    </ui-blur-reveal>
-    <ui-blur-reveal :delay="300">
-      <h2 class="font-secondary font-black text-7xl italic -mt-10">{{ t("home.hero.title.to_the") }}</h2>
-           </ui-blur-reveal>
+  <section class="h-screen p-20 bg-black text-white">
+    <motion.div class="absolute top-1/3 left-1/2 -translate-x-1/2" :initial="{ transform: 'translateY(-33%)' }"
+      :animate="{ transform: 'translateY(-70%)' }" :transition="{ delay: 1.5, duration: 2, ease: 'easeInOut' }">
+      <ui-blur-reveal :delay="0.4">
+        <h1 class="font-black text-9xl mt-40">{{ t("home.hero.title.welcome") }}</h1>
+        <h2 class="font-primary font-black text-2xl -mt-4 ml-18">{{ t("home.hero.title.to_the") }}...</h2>
+        <h2>{{ t("home.hero.title.first") }}</h2>
+      </ui-blur-reveal>
+    </motion.div>
+    <motion.div :initial="{ transform: 'translateY(500px)', opacity: 0, filter: 'blur(20px)' }"
+      :animate="{ transform: 'translateY(300px)', opacity: 1, filter: 'blur(0px)' }"
+      :transition="{ delay: 3, duration: 2, ease: 'easeInOut' }">
+      <div class="mt-20 relative h-[250px] w-full overflow-clip">
+        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="11.2">
+          {{ t("home.hero.title.festival_one").toUpperCase() }}
+        </ui-video-text>
+      </div>
+      <div class="relative h-[250px] w-full overflow-clip -mt-32 lg:-mt-14">
+        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="19">
+          {{ t("home.hero.title.festival_two").toUpperCase() }}
+        </ui-video-text>
+      </div>
+    </motion.div>
   </section>
 
   <section class="bg-white text-black py-14 px-5 text-center">
@@ -57,6 +73,7 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive } from 'vue';
+import { animate, motion } from 'motion-v';
 
 const { t } = useI18n();
 

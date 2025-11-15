@@ -1,21 +1,7 @@
 <template>
-  <div
-    ref="container"
-    :class="props.class"
-  >
-    <Motion
-      v-for="(child, index) in children"
-      :key="index"
-      ref="childElements"
-      as="div"
-      :initial="getInitial()"
-      :while-in-view="getAnimate()"
-      :transition="{
-        duration: props.duration,
-        easing: 'easeInOut',
-        delay: props.delay * index,
-      }"
-    >
+  <div ref="container" :class="props.class">
+    <Motion v-for="(child, index) in children" :key="index" ref="childElements" as="div" :initial="getInitial()"
+      :while-in-view="getAnimate()" :transition="getTransition(index)">
       <component :is="child" />
     </Motion>
   </div>
@@ -44,7 +30,6 @@ const container = ref(null);
 const childElements = ref([]);
 const slots = useSlots();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const children = ref<any>([]);
 
 onMounted(() => {
@@ -69,4 +54,14 @@ function getAnimate() {
     y: 0,
   };
 }
+
+function getTransition(index: number) {
+  // Cast to any to satisfy the motion-v types which don't include 'easing'
+  return {
+    duration: props.duration,
+    easing: 'easeInOut',
+    delay: props.delay * index,
+  } as unknown as any;
+}
+
 </script>

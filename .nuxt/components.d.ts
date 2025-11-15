@@ -19,6 +19,7 @@ export const LanguageSwitcher: typeof import("../components/LanguageSwitcher.vue
 export const NavBar: typeof import("../components/NavBar.vue")['default']
 export const UiBlurReveal: typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']
 export const UiTextHoverEffect: typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
+export const UiVideoText: typeof import("../components/ui/video-text/VideoText.vue")['default']
 export const UiWarpBackgroundBeam: typeof import("../components/ui/warp-background/Beam.vue")['default']
 export const UiWarpBackground: typeof import("../components/ui/warp-background/WarpBackground.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
@@ -50,6 +51,7 @@ export const LazyLanguageSwitcher: LazyComponent<typeof import("../components/La
 export const LazyNavBar: LazyComponent<typeof import("../components/NavBar.vue")['default']>
 export const LazyUiBlurReveal: LazyComponent<typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']>
 export const LazyUiTextHoverEffect: LazyComponent<typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
+export const LazyUiVideoText: LazyComponent<typeof import("../components/ui/video-text/VideoText.vue")['default']>
 export const LazyUiWarpBackgroundBeam: LazyComponent<typeof import("../components/ui/warp-background/Beam.vue")['default']>
 export const LazyUiWarpBackground: LazyComponent<typeof import("../components/ui/warp-background/WarpBackground.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>

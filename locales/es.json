@@ -19,8 +19,9 @@
       "title": {
         "welcome": "Bienvenid@s",
         "to_the": "al",
-        "first": "Primer",
-        "festival": "Festival Anual de Cine Nido"
+        "first": "1er",
+        "festival_one": "Festival Anual",
+        "festival_two": "Cine Nido"
       },
       "subtitle": "Celebrando cineastas emergentes y sus visiones creativas",
       "cta_submit": "Envía tu película",

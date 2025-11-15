@@ -19,8 +19,9 @@
       "title": {
         "welcome": "Welcome",
         "to_the": "to the",
-        "first": "First",
-        "festival": "Annual Nido Film Festival"
+        "first": "First Annual",
+        "festival_one": "Nido Film",
+        "festival_two": "Festival"
       },
       "subtitle": "Celebrating emerging filmmakers and their creative visions",
       "cta_submit": "Submit Your Film",
