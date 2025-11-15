@@ -5,10 +5,9 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# SvelteKit
-.svelte-kit/
-.vite/
-build/
+# Nuxt 
+.output/
+.nuxt/
 .DS_Store
 
 # Env

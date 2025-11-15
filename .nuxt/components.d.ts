@@ -17,6 +17,10 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 export const AppFooter: typeof import("../components/AppFooter.vue")['default']
 export const LanguageSwitcher: typeof import("../components/LanguageSwitcher.vue")['default']
 export const NavBar: typeof import("../components/NavBar.vue")['default']
+export const UiBlurReveal: typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']
+export const UiTextHoverEffect: typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
+export const UiWarpBackgroundBeam: typeof import("../components/ui/warp-background/Beam.vue")['default']
+export const UiWarpBackground: typeof import("../components/ui/warp-background/WarpBackground.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -29,6 +33,7 @@ export const NuxtTime: typeof import("../node_modules/nuxt/dist/app/components/n
 export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
 export const NuxtImg: typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']
 export const NuxtPicture: typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']
+export const GSAPTransition: typeof import("../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']
 export const NuxtPage: typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']
 export const NoScript: typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']
 export const Link: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -43,6 +48,10 @@ export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components
 export const LazyAppFooter: LazyComponent<typeof import("../components/AppFooter.vue")['default']>
 export const LazyLanguageSwitcher: LazyComponent<typeof import("../components/LanguageSwitcher.vue")['default']>
 export const LazyNavBar: LazyComponent<typeof import("../components/NavBar.vue")['default']>
+export const LazyUiBlurReveal: LazyComponent<typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']>
+export const LazyUiTextHoverEffect: LazyComponent<typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
+export const LazyUiWarpBackgroundBeam: LazyComponent<typeof import("../components/ui/warp-background/Beam.vue")['default']>
+export const LazyUiWarpBackground: LazyComponent<typeof import("../components/ui/warp-background/WarpBackground.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
 export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
@@ -55,6 +64,7 @@ export const LazyNuxtTime: LazyComponent<typeof import("../node_modules/nuxt/dis
 export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
 export const LazyNuxtImg: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']>
 export const LazyNuxtPicture: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']>
+export const LazyGSAPTransition: LazyComponent<typeof import("../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']>
 export const LazyNuxtPage: LazyComponent<typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']>
 export const LazyNoScript: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
 export const LazyLink: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']>

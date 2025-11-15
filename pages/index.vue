@@ -1,28 +1,11 @@
 <template>
-  <section id="home"
-    class="h-[80vh] text-white text-center relative overflow-hidden py-24 px-5 flex justify-center items-center">
-    <img src="/bg.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-black/60" />
-    <div class="max-w-3xl mx-auto relative z-10 bg-black bg-opacity-50 px-6 md:px-20 py-10 rounded-xl backdrop-blur-lg">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        {{ t('home.hero.title') }}
-      </h2>
-      <p class="text-lg md:text-xl opacity-90 mb-8">
-        {{ t('home.hero.subtitle') }}
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <NuxtLink
-          class="inline-block px-6 py-3 rounded font-semibold bg-highlight text-white border-2 border-transparent transition transform hover:-translate-y-0.5 hover:bg-gold hover:text-primary shadow-[5px_5px_0_0_rgba(233,69,96,0.4)]"
-          to="/submission">
-          {{ t('home.hero.cta_submit') }}
-        </NuxtLink>
-        <NuxtLink
-          class="inline-block px-6 py-3 rounded font-semibold border-2 border-white text-white transition hover:bg-white hover:text-primary"
-          to="/about">
-          {{ t('home.hero.cta_learn') }}
-        </NuxtLink>
-      </div>
-    </div>
+  <section class="h-screen p-20">
+    <ui-blur-reveal>
+      <h1 class="font-secondary font-black text-9xl italic mt-20">{{ t("home.hero.title.welcome") }}</h1>
+    </ui-blur-reveal>
+    <ui-blur-reveal :delay="300">
+      <h2 class="font-secondary font-black text-7xl italic -mt-10">{{ t("home.hero.title.to_the") }}</h2>
+           </ui-blur-reveal>
   </section>
 
   <section class="bg-white text-black py-14 px-5 text-center">

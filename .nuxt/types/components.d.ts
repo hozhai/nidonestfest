@@ -17,6 +17,10 @@ interface _GlobalComponents {
   'AppFooter': typeof import("../../components/AppFooter.vue")['default']
   'LanguageSwitcher': typeof import("../../components/LanguageSwitcher.vue")['default']
   'NavBar': typeof import("../../components/NavBar.vue")['default']
+  'UiBlurReveal': typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']
+  'UiTextHoverEffect': typeof import("../../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
+  'UiWarpBackgroundBeam': typeof import("../../components/ui/warp-background/Beam.vue")['default']
+  'UiWarpBackground': typeof import("../../components/ui/warp-background/WarpBackground.vue")['default']
   'NuxtWelcome': typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   'NuxtLayout': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   'NuxtErrorBoundary': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -29,6 +33,7 @@ interface _GlobalComponents {
   'NuxtRouteAnnouncer': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
   'NuxtImg': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']
   'NuxtPicture': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']
+  'GSAPTransition': typeof import("../../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']
   'NuxtPage': typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
   'NoScript': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
   'Link': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -43,6 +48,10 @@ interface _GlobalComponents {
   'LazyAppFooter': LazyComponent<typeof import("../../components/AppFooter.vue")['default']>
   'LazyLanguageSwitcher': LazyComponent<typeof import("../../components/LanguageSwitcher.vue")['default']>
   'LazyNavBar': LazyComponent<typeof import("../../components/NavBar.vue")['default']>
+  'LazyUiBlurReveal': LazyComponent<typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']>
+  'LazyUiTextHoverEffect': LazyComponent<typeof import("../../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
+  'LazyUiWarpBackgroundBeam': LazyComponent<typeof import("../../components/ui/warp-background/Beam.vue")['default']>
+  'LazyUiWarpBackground': LazyComponent<typeof import("../../components/ui/warp-background/WarpBackground.vue")['default']>
   'LazyNuxtWelcome': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   'LazyNuxtLayout': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   'LazyNuxtErrorBoundary': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
@@ -55,6 +64,7 @@ interface _GlobalComponents {
   'LazyNuxtRouteAnnouncer': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
   'LazyNuxtImg': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']>
   'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']>
+  'LazyGSAPTransition': LazyComponent<typeof import("../../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']>
   'LazyNuxtPage': LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
   'LazyNoScript': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
   'LazyLink': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>

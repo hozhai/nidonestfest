@@ -1,5 +1,7 @@
 import globals from 'globals';
 import pluginVue from 'eslint-plugin-vue';
+import vueParser from 'vue-eslint-parser';
+import tsParser from '@typescript-eslint/parser';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -9,10 +11,11 @@ export default [
   {
     files: ['**/*.vue'],
     languageOptions: {
-      parser: pluginVue.parsers['vue-eslint-parser'],
+      parser: vueParser,
       parserOptions: {
         ecmaVersion: 2023,
-        sourceType: 'module'
+        sourceType: 'module',
+        parser: tsParser
       },
       globals: {
         ...globals.browser,
@@ -28,6 +31,7 @@ export default [
   {
     files: ['**/*.{js,ts}'],
     languageOptions: {
+      parser: tsParser,
       ecmaVersion: 2023,
       sourceType: 'module',
       globals: {

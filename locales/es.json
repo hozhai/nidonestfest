@@ -16,7 +16,12 @@
   },
   "home": {
     "hero": {
-      "title": "Bienvenidos al Primer Festival Anual de Cine Nido",
+      "title": {
+        "welcome": "Bienvenid@s",
+        "to_the": "al",
+        "first": "Primer",
+        "festival": "Festival Anual de Cine Nido"
+      },
       "subtitle": "Celebrando cineastas emergentes y sus visiones creativas",
       "cta_submit": "Envía tu película",
       "cta_learn": "Conocer más"

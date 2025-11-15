@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed w-full backdrop-blur-xl top-10 z-40 bg-primary bg-opacity-70 shadow">
+  <nav class="fixed w-full backdrop-blur-md top-12 z-40 bg-primary/50 shadow">
     <div class="container flex items-center justify-between py-4">
       <div class="text-white text-xl font-bold">{{ t('brand.title') }}</div>
 

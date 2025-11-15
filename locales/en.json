@@ -16,7 +16,12 @@
   },
   "home": {
     "hero": {
-      "title": "Welcome to the First Annual Nido Film Festival",
+      "title": {
+        "welcome": "Welcome",
+        "to_the": "to the",
+        "first": "First",
+        "festival": "Annual Nido Film Festival"
+      },
       "subtitle": "Celebrating emerging filmmakers and their creative visions",
       "cta_submit": "Submit Your Film",
       "cta_learn": "Learn More"

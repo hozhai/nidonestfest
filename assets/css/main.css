@@ -1,17 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: #0d1929;
+  --color-foreground: oklch(0.141 0.005 285.823);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.141 0.005 285.823);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.141 0.005 285.823);
+  --color-primary: #002365;
+  --color-primary-foreground: #0d1929;
+  --color-secondary: #ffffff;
+  --color-secondary-foreground: oklch(0.21 0.006 285.885);
+  --color-muted: oklch(0.967 0.001 286.375);
+  --color-muted-foreground: oklch(0.552 0.016 285.938);
+  --color-accent: #b61d2c;
+  --color-accent-foreground: oklch(0.21 0.006 285.885);
+  --color-highlight: #b61d2c;
+  --color-gold: #ffd700;
+  --color-bgdark: #0d1929;
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: oklch(0.577 0.245 27.325);
+  --color-border: oklch(0.92 0.004 286.32);
+  --color-input: oklch(0.92 0.004 286.32);
+  --color-ring: oklch(0.705 0.015 286.067);
+
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Gravitas One', serif;
+
+  --radius-base: 0.625rem;
+  --radius-sm: calc(var(--radius-base) - 4px);
+  --radius-md: calc(var(--radius-base) - 2px);
+  --radius-lg: var(--radius-base);
+  --radius-xl: calc(var(--radius-base) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-primary;
+  }
+}
+
+html {
+  color-scheme: light;
+}
 
 body {
-  @apply m-0 font-primary text-[#333333] bg-[#f8f9fa] leading-relaxed;
+  margin: 0;
+  font-family: var(--font-primary, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif);
+  color: #333333;
 }
 
 .container {
   @apply max-w-[1200px] mx-auto px-5;
-}
-
-body.menu-open {
-  overflow: hidden;
 }
 
 .pending-box {
