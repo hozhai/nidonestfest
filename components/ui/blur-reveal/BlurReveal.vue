@@ -1,7 +1,7 @@
 <template>
   <div ref="container" :class="props.class">
     <Motion v-for="(child, index) in children" :key="index" ref="childElements" as="div" :initial="getInitial()"
-      :while-in-view="getAnimate()" :transition="getTransition(index)">
+      :animate="getAnimate()" :transition="getTransition(index)">
       <component :is="child" />
     </Motion>
   </div>

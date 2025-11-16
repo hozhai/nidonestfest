@@ -3,21 +3,20 @@
     <motion.div class="absolute top-1/3 left-1/2 -translate-x-1/2" :initial="{ transform: 'translateY(-33%)' }"
       :animate="{ transform: 'translateY(-70%)' }" :transition="{ delay: 1.5, duration: 2, ease: 'easeInOut' }">
       <ui-blur-reveal :delay="0.4">
-        <h1 class="font-black text-9xl mt-40">{{ t("home.hero.title.welcome") }}</h1>
-        <h2 class="font-primary font-black text-2xl -mt-4 ml-18">{{ t("home.hero.title.to_the") }}...</h2>
-        <h2>{{ t("home.hero.title.first") }}</h2>
+        <h1 class="font-secondary italic font-black text-center text-4xl lg:text-9xl mt-40">{{ t("home.hero.title.welcome") }}</h1>
+        <h2 class="w-full text-center text-2xl lg:text-7xl lg:-mt-4 whitespace-nowrap">{{ t("home.hero.title.to_the") }} <span class="text-gold font-bold">{{ t("home.hero.title.first") }}</span></h2>
       </ui-blur-reveal>
     </motion.div>
-    <motion.div :initial="{ transform: 'translateY(500px)', opacity: 0, filter: 'blur(20px)' }"
-      :animate="{ transform: 'translateY(300px)', opacity: 1, filter: 'blur(0px)' }"
+    <motion.div :initial="{ y: 500, opacity: 0, filter: 'blur(20px)' }"
+      :animate="{opacity: 1, filter: 'blur(0px)', y: 250 }"
       :transition="{ delay: 3, duration: 2, ease: 'easeInOut' }">
       <div class="mt-20 relative h-[250px] w-full overflow-clip">
-        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="11.2">
+        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="10.2">
           {{ t("home.hero.title.festival_one").toUpperCase() }}
         </ui-video-text>
       </div>
-      <div class="relative h-[250px] w-full overflow-clip -mt-32 lg:-mt-14">
-        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="19">
+      <div class="relative h-[300px] w-full overflow-clip -mt-54 sm:-mt-48 lg:-mt-16">
+        <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" :font-size="17">
           {{ t("home.hero.title.festival_two").toUpperCase() }}
         </ui-video-text>
       </div>

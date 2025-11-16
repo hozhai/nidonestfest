@@ -15,7 +15,6 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 
 export const AppFooter: typeof import("../components/AppFooter.vue")['default']
-export const LanguageSwitcher: typeof import("../components/LanguageSwitcher.vue")['default']
 export const NavBar: typeof import("../components/NavBar.vue")['default']
 export const UiBlurReveal: typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']
 export const UiTextHoverEffect: typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
@@ -35,6 +34,7 @@ export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/co
 export const NuxtImg: typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']
 export const NuxtPicture: typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']
 export const GSAPTransition: typeof import("../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']
+export const Icon: typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']
 export const NuxtPage: typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']
 export const NoScript: typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']
 export const Link: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -47,7 +47,6 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const LazyAppFooter: LazyComponent<typeof import("../components/AppFooter.vue")['default']>
-export const LazyLanguageSwitcher: LazyComponent<typeof import("../components/LanguageSwitcher.vue")['default']>
 export const LazyNavBar: LazyComponent<typeof import("../components/NavBar.vue")['default']>
 export const LazyUiBlurReveal: LazyComponent<typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']>
 export const LazyUiTextHoverEffect: LazyComponent<typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
@@ -67,6 +66,7 @@ export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../node_module
 export const LazyNuxtImg: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']>
 export const LazyNuxtPicture: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']>
 export const LazyGSAPTransition: LazyComponent<typeof import("../node_modules/v-gsap-nuxt/dist/runtime/components/GSAPTransition.vue")['default']>
+export const LazyIcon: LazyComponent<typeof import("../node_modules/@nuxt/icon/dist/runtime/components/index")['default']>
 export const LazyNuxtPage: LazyComponent<typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']>
 export const LazyNoScript: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
 export const LazyLink: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']>

@@ -7,7 +7,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div class="bg-white p-6 rounded-lg shadow-[8px_8px_0_rgba(0,0,0,0.3)]">
           <div class="w-20 h-20 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto mb-3">
-            <i class="fas fa-user text-2xl text-accent" />
+            <icon name="line-md:account" class="text-3xl text-accent" />
           </div>
           <h3 class="text-center font-semibold">David Gran</h3>
           <div class="pending-box mt-3">
@@ -16,7 +16,7 @@
         </div>
         <div class="bg-white p-6 rounded-lg shadow-[8px_8px_0_rgba(0,0,0,0.3)]">
           <div class="w-20 h-20 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto mb-3">
-            <i class="fas fa-user text-2xl text-accent" />
+            <icon name="line-md:account" class="text-3xl text-accent" />
           </div>
           <h3 class="text-center font-semibold">Jonas Hekel</h3>
           <div class="pending-box mt-3">
@@ -25,7 +25,7 @@
         </div>
         <div class="bg-white p-6 rounded-lg shadow-[8px_8px_0_rgba(0,0,0,0.3)]">
           <div class="w-20 h-20 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto mb-3">
-            <i class="fas fa-user text-2xl text-accent" />
+            <icon name="line-md:account" class="text-3xl text-accent" />
           </div>
           <h3 class="text-center font-semibold">Pedro Pascal</h3>
           <div class="pending-box mt-3">

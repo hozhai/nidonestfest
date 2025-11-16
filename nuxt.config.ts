@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-12-01',
   css: ['~/assets/css/main.css'],
   components: [{ path: '~/components', extensions: ['vue'] }],
-  modules: ['@nuxt/fonts', 'v-gsap-nuxt'],
+  modules: ['@nuxt/fonts', 'v-gsap-nuxt', '@nuxt/icon'],
   app: {
     head: {
       title: 'Nido Nest Fest',
@@ -13,6 +13,10 @@ export default defineNuxtConfig({
       meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
       htmlAttrs: { lang: 'en' }
     }
+  },
+  icon: {
+    mode: 'css',
+    cssLayer: 'base'
   },
   vite: {
     plugins: [tailwindcss()]
