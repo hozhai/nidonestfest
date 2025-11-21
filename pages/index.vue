@@ -10,14 +10,14 @@
         </h2>
       </ui-blur-reveal>
     </motion.div>
-    <motion.div :initial="{ y: 500, opacity: 0, filter: 'blur(20px)' }"
-      :animate="{ opacity: 1, filter: 'blur(0px)', y: 300 }" :transition="{ delay: 3, duration: 2, ease: 'easeInOut' }">
+    <motion.div :initial="{ y: 400, opacity: 0, filter: 'blur(20px)' }" class="sm:-mt-12 lg:mt-64"
+      :animate="{ opacity: 1, filter: 'blur(0px)', y: 100 }" :transition="{ delay: 3, duration: 2, ease: 'easeInOut' }">
       <div class="mt-20 relative h-[250px] w-full overflow-clip">
         <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" font-size="10.2vw">
           {{ t("home.hero.title.festival_one").toUpperCase() }}
         </ui-video-text>
       </div>
-      <div class="relative h-[300px] w-full overflow-clip -mt-54 sm:-mt-48 lg:-mt-24">
+      <div class="relative h-[300px] w-full overflow-clip -mt-54 sm:-mt-44 lg:-mt-24">
         <ui-video-text src="https://cdn.magicui.design/ocean-small.webm" text-anchor="middle" font-size="17vw">
           {{ t("home.hero.title.festival_two").toUpperCase() }}
         </ui-video-text>
