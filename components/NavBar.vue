@@ -5,39 +5,48 @@
 
       <ul class="hidden md:flex list-none gap-8 items-center">
         <li v-for="item in navItems" :key="item.to">
-          <NuxtLink
-            :to="item.to"
-            class="text-white transition hover:text-highlight"
-            :class="{ 'text-highlight font-bold': item.active }"
-          >
+          <NuxtLink :to="item.to" class="text-white transition hover:text-highlight"
+            :class="{ 'text-highlight font-bold': item.active }">
             {{ item.label }}
           </NuxtLink>
         </li>
       </ul>
 
       <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2">
+          <button v-if="!session.data"
+            class="text-white border border-white/70 px-3 py-1 rounded text-sm hover:bg-highlight hover:border-highlight transition"
+            @click="signIn.social({ provider: 'google' })">
+            Sign In
+          </button>
+          <div v-else class="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <img v-if="session.data.user.image" :src="session.data.user.image" class="w-8 h-8 rounded-full" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem @click="signOut()">Sign Out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+
         <div class="hidden md:flex gap-2">
-          <button
-            v-for="option in languageOptions"
-            :key="option.code"
-            type="button"
-            :class="languageButtonClasses(option.code)"
-            @click="setLanguage(option.code)"
-          >
+          <button v-for="option in languageOptions" :key="option.code" type="button"
+            :class="languageButtonClasses(option.code)" @click="setLanguage(option.code)">
             {{ t(option.labelKey) }}
           </button>
         </div>
 
-        <button
-          aria-label="Toggle menu"
-          class="md:hidden flex flex-col gap-1 cursor-pointer z-50"
-          type="button"
-          :aria-expanded="menuOpen"
-          @click="menuOpen = !menuOpen"
-        >
-          <span class="w-6 h-0.5 transition-transform" :class="menuOpen ? '-rotate-45 translate-y-1.5 bg-white' : 'bg-white'" />
+        <button aria-label="Toggle menu" class="md:hidden flex flex-col gap-1 cursor-pointer z-50" type="button"
+          :aria-expanded="menuOpen" @click="menuOpen = !menuOpen">
+          <span class="w-6 h-0.5 transition-transform"
+            :class="menuOpen ? '-rotate-45 translate-y-1.5 bg-white' : 'bg-white'" />
           <span class="w-6 h-0.5 bg-white transition-opacity" :class="{ 'opacity-0': menuOpen }" />
-          <span class="w-6 h-0.5 transition-transform" :class="menuOpen ? 'rotate-45 -translate-y-1.5 bg-white' : 'bg-white'" />
+          <span class="w-6 h-0.5 transition-transform"
+            :class="menuOpen ? 'rotate-45 -translate-y-1.5 bg-white' : 'bg-white'" />
         </button>
       </div>
     </div>
@@ -45,21 +54,24 @@
     <ul
       class="md:hidden fixed w-full h-screen left-0 right-0 bottom-0 top-16 bg-white flex flex-col items-center pt-12 gap-5 shadow-lg transform transition-transform duration-300 z-40 overflow-y-auto"
       :class="menuOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'"
-      :aria-hidden="!menuOpen"
-    >
+      :aria-hidden="!menuOpen">
       <li v-for="item in navItems" :key="`${item.to}-mobile`">
         <NuxtLink class="text-gray-900 text-lg" :to="item.to" @click="closeMenu">
           {{ item.label }}
         </NuxtLink>
       </li>
+      <li v-if="!session.data">
+        <button class="text-gray-900 text-lg" @click="signIn.social({ provider: 'google' }); closeMenu()">Sign
+          In</button>
+      </li>
+      <li v-else class="flex flex-col items-center gap-2">
+        <img v-if="session.data.user.image" :src="session.data.user.image" class="w-10 h-10 rounded-full" />
+        <span class="text-gray-900 font-bold">{{ session.data.user.name }}</span>
+        <button class="text-gray-900 text-lg" @click="signOut(); closeMenu()">Sign Out</button>
+      </li>
       <li class="flex gap-3 pt-4">
-        <button
-          v-for="option in languageOptions"
-          :key="`${option.code}-mobile`"
-          type="button"
-          :class="languageButtonClasses(option.code, 'light')"
-          @click="setLanguage(option.code)"
-        >
+        <button v-for="option in languageOptions" :key="`${option.code}-mobile`" type="button"
+          :class="languageButtonClasses(option.code, 'light')" @click="setLanguage(option.code)">
           {{ t(option.labelKey) }}
         </button>
       </li>
@@ -69,10 +81,17 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { signIn, signOut, useSession } from '~/lib/auth-client';
+import DropdownMenu from './ui/dropdown-menu/DropdownMenu.vue';
+import DropdownMenuTrigger from './ui/dropdown-menu/DropdownMenuTrigger.vue';
+import DropdownMenuContent from './ui/dropdown-menu/DropdownMenuContent.vue';
+import DropdownMenuLabel from './ui/dropdown-menu/DropdownMenuLabel.vue';
+import DropdownMenuSeparator from './ui/dropdown-menu/DropdownMenuSeparator.vue';
+import DropdownMenuItem from "./ui/dropdown-menu/DropdownMenuItem.vue";
 
 const { t, lang } = useI18n();
 const route = useRoute();
-
+const session = useSession();
 const menuOpen = ref(false);
 
 const navItems = computed(() => [
@@ -121,11 +140,10 @@ const isTransparent = computed(() => isHome.value && !hasScrolled.value);
 
 const navClasses = computed(() => {
   const base = 'fixed left-0 right-0 top-0 z-40 transition-colors duration-300 border-b';
-  return `${base} ${
-    isTransparent.value
-      ? 'bg-transparent border-transparent shadow-none'
-      : 'bg-primary/70 border-white/10 shadow backdrop-blur-md'
-  }`;
+  return `${base} ${isTransparent.value
+    ? 'bg-transparent border-transparent shadow-none'
+    : 'bg-primary/70 border-white/10 shadow backdrop-blur-md'
+    }`;
 });
 
 function updateScrollState() {
@@ -173,4 +191,3 @@ function closeMenu() {
   menuOpen.value = false;
 }
 </script>
-

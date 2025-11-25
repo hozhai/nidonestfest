@@ -15,16 +15,18 @@
   "dependencies": {
     "@nuxt/fonts": "0.12.1",
     "@nuxt/icon": "2.1.0",
-    "@sidebase/authjs-prisma-adapter": "^0.1.0",
-    "@sidebase/nuxt-auth": "1.1.0",
     "@vueuse/core": "^14.0.0",
+    "better-auth": "^1.4.1",
+    "better-sqlite3": "^12.4.6",
     "motion-v": "^1.7.4",
-    "next-auth": "4.21.1",
     "nuxt": "^4.2.1",
+    "reka-ui": "^2.6.0",
     "v-gsap-nuxt": "1.4.4"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.4.1",
     "@tailwindcss/vite": "^4.1.17",
+    "@types/better-sqlite3": "^7.6.13",
     "@typescript-eslint/parser": "^8.47.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
