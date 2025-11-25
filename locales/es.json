@@ -8,7 +8,13 @@
     "submit": "Enviar película",
     "judges": "Jueces",
     "timeline": "Programa",
-    "videos": "Videos"
+    "videos": "Videos",
+    "account": {
+      "signIn": "Iniciar sesión",
+      "signOut": "Cerrar sesión",
+      "myAccount": "Mi Cuenta"
+    }
+
   },
   "language": {
     "english": "English",

@@ -14,20 +14,25 @@
 
       <div class="flex items-center gap-3">
         <div class="hidden md:flex items-center gap-2">
-          <button v-if="!session.data"
-            class="text-white border border-white/70 px-3 py-1 rounded text-sm hover:bg-highlight hover:border-highlight transition"
+          <button v-if="!session.data" class="text-white px-3 py-1 rounded text-md cursor-pointer flex items-center"
             @click="signIn.social({ provider: 'google' })">
-            Sign In
+            <Icon name="lucide:log-in" />
           </button>
           <div v-else class="flex items-center gap-2">
             <DropdownMenu>
-              <DropdownMenuTrigger>
+              <DropdownMenuTrigger class="cursor-pointer">
                 <img v-if="session.data.user.image" :src="session.data.user.image" class="w-8 h-8 rounded-full" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>{{ t("nav.account.myAccount") }}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem @click="signOut()">Sign Out</DropdownMenuItem>
+                <DropdownMenuItem @click="signOut({
+                  fetchOptions: {
+                    onSuccess: () => {
+                      router.push('/')
+                    }
+                  }
+                })">{{ t("nav.account.signOut") }}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -91,6 +96,7 @@ import DropdownMenuItem from "./ui/dropdown-menu/DropdownMenuItem.vue";
 
 const { t, lang } = useI18n();
 const route = useRoute();
+const router = useRouter();
 const session = useSession();
 const menuOpen = ref(false);
 

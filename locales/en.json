@@ -8,7 +8,12 @@
     "submit": "Submit Film",
     "judges": "Judges",
     "timeline": "Timeline",
-    "videos": "Videos"
+    "videos": "Videos",
+    "account": {
+      "signIn": "Sign In",
+      "signOut": "Sign Out",
+      "myAccount": "Account"
+    }
   },
   "language": {
     "english": "English",
