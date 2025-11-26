@@ -15,8 +15,23 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 
 export const AppFooter: typeof import("../components/AppFooter.vue")['default']
+export const LanguageSwitcher: typeof import("../components/LanguageSwitcher.vue")['default']
 export const NavBar: typeof import("../components/NavBar.vue")['default']
 export const UiBlurReveal: typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']
+export const UiDropdownMenu: typeof import("../components/ui/dropdown-menu/DropdownMenu.vue")['default']
+export const UiDropdownMenuCheckboxItem: typeof import("../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']
+export const UiDropdownMenuContent: typeof import("../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']
+export const UiDropdownMenuGroup: typeof import("../components/ui/dropdown-menu/DropdownMenuGroup.vue")['default']
+export const UiDropdownMenuItem: typeof import("../components/ui/dropdown-menu/DropdownMenuItem.vue")['default']
+export const UiDropdownMenuLabel: typeof import("../components/ui/dropdown-menu/DropdownMenuLabel.vue")['default']
+export const UiDropdownMenuRadioGroup: typeof import("../components/ui/dropdown-menu/DropdownMenuRadioGroup.vue")['default']
+export const UiDropdownMenuRadioItem: typeof import("../components/ui/dropdown-menu/DropdownMenuRadioItem.vue")['default']
+export const UiDropdownMenuSeparator: typeof import("../components/ui/dropdown-menu/DropdownMenuSeparator.vue")['default']
+export const UiDropdownMenuShortcut: typeof import("../components/ui/dropdown-menu/DropdownMenuShortcut.vue")['default']
+export const UiDropdownMenuSub: typeof import("../components/ui/dropdown-menu/DropdownMenuSub.vue")['default']
+export const UiDropdownMenuSubContent: typeof import("../components/ui/dropdown-menu/DropdownMenuSubContent.vue")['default']
+export const UiDropdownMenuSubTrigger: typeof import("../components/ui/dropdown-menu/DropdownMenuSubTrigger.vue")['default']
+export const UiDropdownMenuTrigger: typeof import("../components/ui/dropdown-menu/DropdownMenuTrigger.vue")['default']
 export const UiTextHoverEffect: typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
 export const UiVideoText: typeof import("../components/ui/video-text/VideoText.vue")['default']
 export const UiWarpBackgroundBeam: typeof import("../components/ui/warp-background/Beam.vue")['default']
@@ -47,8 +62,23 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const LazyAppFooter: LazyComponent<typeof import("../components/AppFooter.vue")['default']>
+export const LazyLanguageSwitcher: LazyComponent<typeof import("../components/LanguageSwitcher.vue")['default']>
 export const LazyNavBar: LazyComponent<typeof import("../components/NavBar.vue")['default']>
 export const LazyUiBlurReveal: LazyComponent<typeof import("../components/ui/blur-reveal/BlurReveal.vue")['default']>
+export const LazyUiDropdownMenu: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenu.vue")['default']>
+export const LazyUiDropdownMenuCheckboxItem: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']>
+export const LazyUiDropdownMenuContent: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']>
+export const LazyUiDropdownMenuGroup: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuGroup.vue")['default']>
+export const LazyUiDropdownMenuItem: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuItem.vue")['default']>
+export const LazyUiDropdownMenuLabel: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuLabel.vue")['default']>
+export const LazyUiDropdownMenuRadioGroup: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuRadioGroup.vue")['default']>
+export const LazyUiDropdownMenuRadioItem: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuRadioItem.vue")['default']>
+export const LazyUiDropdownMenuSeparator: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuSeparator.vue")['default']>
+export const LazyUiDropdownMenuShortcut: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuShortcut.vue")['default']>
+export const LazyUiDropdownMenuSub: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuSub.vue")['default']>
+export const LazyUiDropdownMenuSubContent: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuSubContent.vue")['default']>
+export const LazyUiDropdownMenuSubTrigger: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuSubTrigger.vue")['default']>
+export const LazyUiDropdownMenuTrigger: LazyComponent<typeof import("../components/ui/dropdown-menu/DropdownMenuTrigger.vue")['default']>
 export const LazyUiTextHoverEffect: LazyComponent<typeof import("../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
 export const LazyUiVideoText: LazyComponent<typeof import("../components/ui/video-text/VideoText.vue")['default']>
 export const LazyUiWarpBackgroundBeam: LazyComponent<typeof import("../components/ui/warp-background/Beam.vue")['default']>

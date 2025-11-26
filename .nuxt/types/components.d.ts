@@ -15,8 +15,23 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 interface _GlobalComponents {
   'AppFooter': typeof import("../../components/AppFooter.vue")['default']
+  'LanguageSwitcher': typeof import("../../components/LanguageSwitcher.vue")['default']
   'NavBar': typeof import("../../components/NavBar.vue")['default']
   'UiBlurReveal': typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']
+  'UiDropdownMenu': typeof import("../../components/ui/dropdown-menu/DropdownMenu.vue")['default']
+  'UiDropdownMenuCheckboxItem': typeof import("../../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']
+  'UiDropdownMenuContent': typeof import("../../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']
+  'UiDropdownMenuGroup': typeof import("../../components/ui/dropdown-menu/DropdownMenuGroup.vue")['default']
+  'UiDropdownMenuItem': typeof import("../../components/ui/dropdown-menu/DropdownMenuItem.vue")['default']
+  'UiDropdownMenuLabel': typeof import("../../components/ui/dropdown-menu/DropdownMenuLabel.vue")['default']
+  'UiDropdownMenuRadioGroup': typeof import("../../components/ui/dropdown-menu/DropdownMenuRadioGroup.vue")['default']
+  'UiDropdownMenuRadioItem': typeof import("../../components/ui/dropdown-menu/DropdownMenuRadioItem.vue")['default']
+  'UiDropdownMenuSeparator': typeof import("../../components/ui/dropdown-menu/DropdownMenuSeparator.vue")['default']
+  'UiDropdownMenuShortcut': typeof import("../../components/ui/dropdown-menu/DropdownMenuShortcut.vue")['default']
+  'UiDropdownMenuSub': typeof import("../../components/ui/dropdown-menu/DropdownMenuSub.vue")['default']
+  'UiDropdownMenuSubContent': typeof import("../../components/ui/dropdown-menu/DropdownMenuSubContent.vue")['default']
+  'UiDropdownMenuSubTrigger': typeof import("../../components/ui/dropdown-menu/DropdownMenuSubTrigger.vue")['default']
+  'UiDropdownMenuTrigger': typeof import("../../components/ui/dropdown-menu/DropdownMenuTrigger.vue")['default']
   'UiTextHoverEffect': typeof import("../../components/ui/text-hover-effect/TextHoverEffect.vue")['default']
   'UiVideoText': typeof import("../../components/ui/video-text/VideoText.vue")['default']
   'UiWarpBackgroundBeam': typeof import("../../components/ui/warp-background/Beam.vue")['default']
@@ -47,8 +62,23 @@ interface _GlobalComponents {
   'Body': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   'NuxtIsland': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
   'LazyAppFooter': LazyComponent<typeof import("../../components/AppFooter.vue")['default']>
+  'LazyLanguageSwitcher': LazyComponent<typeof import("../../components/LanguageSwitcher.vue")['default']>
   'LazyNavBar': LazyComponent<typeof import("../../components/NavBar.vue")['default']>
   'LazyUiBlurReveal': LazyComponent<typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']>
+  'LazyUiDropdownMenu': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenu.vue")['default']>
+  'LazyUiDropdownMenuCheckboxItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']>
+  'LazyUiDropdownMenuContent': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']>
+  'LazyUiDropdownMenuGroup': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuGroup.vue")['default']>
+  'LazyUiDropdownMenuItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuItem.vue")['default']>
+  'LazyUiDropdownMenuLabel': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuLabel.vue")['default']>
+  'LazyUiDropdownMenuRadioGroup': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuRadioGroup.vue")['default']>
+  'LazyUiDropdownMenuRadioItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuRadioItem.vue")['default']>
+  'LazyUiDropdownMenuSeparator': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuSeparator.vue")['default']>
+  'LazyUiDropdownMenuShortcut': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuShortcut.vue")['default']>
+  'LazyUiDropdownMenuSub': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuSub.vue")['default']>
+  'LazyUiDropdownMenuSubContent': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuSubContent.vue")['default']>
+  'LazyUiDropdownMenuSubTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuSubTrigger.vue")['default']>
+  'LazyUiDropdownMenuTrigger': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuTrigger.vue")['default']>
   'LazyUiTextHoverEffect': LazyComponent<typeof import("../../components/ui/text-hover-effect/TextHoverEffect.vue")['default']>
   'LazyUiVideoText': LazyComponent<typeof import("../../components/ui/video-text/VideoText.vue")['default']>
   'LazyUiWarpBackgroundBeam': LazyComponent<typeof import("../../components/ui/warp-background/Beam.vue")['default']>

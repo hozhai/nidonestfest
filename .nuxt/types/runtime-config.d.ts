@@ -10,6 +10,12 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
       cdnURL: string,
    },
 
+   google: {
+      clientId: string,
+
+      clientSecret: string,
+   },
+
    nitro: {
       envPrefix: string,
    },
