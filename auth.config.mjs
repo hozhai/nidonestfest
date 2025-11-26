@@ -1,10 +1,14 @@
 import { betterAuth } from "better-auth";
+import postgres from "postgres";
 import Database from "better-sqlite3";
 
-const sqlite = new Database("sqlite.db");
+// Use PostgreSQL if DATABASE_URL is set (for migrations), otherwise SQLite
+const db = process.env.DATABASE_URL
+  ? postgres(process.env.DATABASE_URL)
+  : new Database("sqlite.db");
 
 export const auth = betterAuth({
-  database: sqlite,
+  database: db,
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
