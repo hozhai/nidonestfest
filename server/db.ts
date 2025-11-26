@@ -1,8 +1,7 @@
-import { Kysely } from "kysely";
-import { LibsqlDialect } from "@libsql/kysely-libsql";
+import { createClient } from "@libsql/client";
 import Database from "better-sqlite3";
 
-let _sqlite: Database.Database | Kysely<any> | null = null;
+let _sqlite: Database.Database | ReturnType<typeof createClient> | null = null;
 
 // Lazy-load the database connection - call this function to get the database
 export function getDatabase() {
@@ -13,11 +12,10 @@ export function getDatabase() {
     const tursoToken = process.env.TURSO_AUTH_TOKEN;
 
     if (isProduction && tursoUrl && tursoToken) {
-      _sqlite = new Kysely({
-        dialect: new LibsqlDialect({
-          url: tursoUrl,
-          authToken: tursoToken,
-        }),
+      // Use LibSQL client directly for better-auth compatibility
+      _sqlite = createClient({
+        url: tursoUrl,
+        authToken: tursoToken,
       });
     } else {
       _sqlite = new Database("sqlite.db");
