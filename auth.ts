@@ -1,6 +1,5 @@
 import { betterAuth } from "better-auth";
-import pkg from "pg";
-const { Pool } = pkg;
+import { Pool } from "pg";
 import Database from "better-sqlite3";
 
 // Use PostgreSQL if DATABASE_URL is set (for migrations), otherwise SQLite
@@ -12,8 +11,8 @@ export const auth = betterAuth({
   database: db,
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
 });

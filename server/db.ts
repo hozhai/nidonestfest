@@ -1,7 +1,7 @@
-import postgres from "postgres";
+import { Pool } from "pg";
 import Database from "better-sqlite3";
 
-let _db: Database.Database | ReturnType<typeof postgres> | null = null;
+let _db: Database.Database | Pool | null = null;
 
 // Lazy-load the database connection - call this function to get the database
 export function getDatabase() {
@@ -12,7 +12,7 @@ export function getDatabase() {
 
     if (isProduction && databaseUrl) {
       // Use PostgreSQL (Neon) in production
-      _db = postgres(databaseUrl);
+      _db = new Pool({ connectionString: databaseUrl });
     } else {
       // Use SQLite in development
       _db = new Database("sqlite.db");
