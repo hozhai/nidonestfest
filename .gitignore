@@ -7,9 +7,10 @@ yarn-error.log*
 
 # Nuxt 
 .output/
-.nuxt/**
+.nuxt
 .DS_Store
 
 # Env
 .env
 .env.*
+.vercel
