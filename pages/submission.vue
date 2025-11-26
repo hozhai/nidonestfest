@@ -12,12 +12,12 @@
         </iframe>
       </div>
       <div v-else class="flex flex-col items-center justify-center py-10 text-center">
-        <p class="text-xl text-gray-600 mb-6">Please sign in to access the submission form.</p>
+        <p class="text-xl text-gray-600 mb-6">{{ t("submission.signIn") }}</p>
         <button
           class="flex items-center cursor-pointer justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-medium py-2 px-6 rounded hover:bg-gray-50 transition shadow-sm"
           @click="signIn.social({ provider: 'google' })">
           <Icon name="logos:google-icon" class="w-5 h-5" />
-          <span>Sign in with Google</span>
+          <span>{{ t("submission.button") }}</span>
         </button>
       </div>
     </div>

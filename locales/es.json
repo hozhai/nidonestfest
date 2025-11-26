@@ -66,7 +66,9 @@
     "pending": "Información del juez próximamente..."
   },
   "submission": {
-    "title": "Envía tu película"
+    "title": "Envía tu película",
+    "signIn": "Por favor inicie sesión para acceder el formulario.",
+    "button": "Iniciar sesión con Google"
   },
   "timeline": {
     "title": "Programa del Festival",

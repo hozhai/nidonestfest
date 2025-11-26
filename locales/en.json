@@ -65,7 +65,9 @@
     "pending": "Judge information coming soon..."
   },
   "submission": {
-    "title": "Submit Your Film"
+    "title": "Submit Your Film",
+    "signIn": "Please sign in to access the submission form.",
+    "button": "Sign in with Google"
   },
   "timeline": {
     "title": "Festival Timeline",
