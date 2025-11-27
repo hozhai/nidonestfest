@@ -1,18 +1,17 @@
 export type PrizeOption = {
   key: string;
-  name: string;
   entryFee: number;
 };
 
 export const PRIZE_OPTIONS: PrizeOption[] = [
-  { key: "best_narrative", name: "Best Narrative Picture", entryFee: 20000 },
-  { key: "best_cinematography", name: "Best Cinematography in a Narrative Picture", entryFee: 15000 },
-  { key: "best_editing", name: "Best Editing in a Narrative Picture", entryFee: 15000 },
-  { key: "best_screenwriting", name: "Best Screenwriting in a Narrative Picture", entryFee: 15000 },
-  { key: "best_sound", name: "Best Sound Design in a Narrative Picture", entryFee: 15000 },
-  { key: "best_acting", name: "Best Acting in a Narrative Picture", entryFee: 15000 },
-  { key: "best_documentary", name: "Best Documentary Picture", entryFee: 20000 },
-  { key: "best_use_music", name: "Best Use of Music", entryFee: 15000 },
+  { key: "best_narrative", entryFee: 20000 },
+  { key: "best_cinematography", entryFee: 15000 },
+  { key: "best_editing", entryFee: 15000 },
+  { key: "best_screenwriting", entryFee: 15000 },
+  { key: "best_sound", entryFee: 15000 },
+  { key: "best_acting", entryFee: 15000 },
+  { key: "best_documentary", entryFee: 20000 },
+  { key: "best_use_music", entryFee: 15000 },
 ];
 
 export const getPrizeOption = (key?: string | null) =>

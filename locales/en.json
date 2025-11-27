@@ -84,6 +84,7 @@
       "pastScreenings": "Past screening locations*",
       "additionalInfo": "Anything else to add?",
       "prize": "Prize Categories*",
+      "prizeInstructions": "Select one or more awards. You'll be charged the combined entry fee. Award choices lock once your submission is confirmed.",
       "prizeSelect": "Select one or more awards",
       "priceToPay": "Entry fee",
       "paymentError": "We couldn't start the payment flow. Please try again.",
@@ -96,11 +97,22 @@
     "admin": {
       "title": "All Submissions",
       "noSubmissions": "No submissions yet."
+    },
+    "prizes": {
+      "best_narrative": "Best Narrative Picture",
+      "best_cinematography": "Best Cinematography in a Narrative Picture",
+      "best_editing": "Best Editing in a Narrative Picture",
+      "best_screenwriting": "Best Screenwriting in a Narrative Picture",
+      "best_sound": "Best Sound Design in a Narrative Picture",
+      "best_acting": "Best Acting in a Narrative Picture",
+      "best_documentary": "Best Documentary Picture",
+      "best_use_music": "Best Use of Music"
+    },
+    "payment": {
+      "cardsInChile": "Credit/debit cards issued in Chile",
+      "fallbackHelp": "Can't use Webpay? Contact us directly and we'll help you complete the submission.",
+      "paymentRequired": "A payment is required before submitting these awards."
     }
-  },
-  "timeline": {
-    "title": "Festival Timeline",
-    "pending": "Timeline of events coming soon..."
   },
   "videos": {
     "title": "Featured Videos",

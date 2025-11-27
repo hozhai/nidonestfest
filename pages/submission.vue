@@ -179,8 +179,7 @@
             <!-- Prize Categories / Fees -->
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.prize') }}</label>
-              <p class="text-xs text-gray-500 mb-3">Select one or more awards. You'll be charged the combined
-                entry fee. Award choices lock once your submission is confirmed.</p>
+              <p class="text-xs text-gray-500 mb-3">{{ t('submission.form.prizeInstructions') }}</p>
               <div class="grid gap-3 md:grid-cols-2">
                 <label v-for="opt in prizeOptions" :key="opt.key" :class="['flex items-start gap-3 p-3 border rounded-lg transition cursor-pointer',
                   formData.prizeCategories.includes(opt.key) ? 'border-primary bg-primary/5' : 'border-gray-200',
@@ -188,7 +187,7 @@
                   <input type="checkbox" :value="opt.key" v-model="formData.prizeCategories" :disabled="awardsLocked"
                     class="mt-1" />
                   <div>
-                    <p class="text-sm font-semibold text-gray-900">{{ opt.name }}</p>
+                    <p class="text-sm font-semibold text-gray-900">{{ prizeLabel(opt.key) }}</p>
                     <p class="text-xs text-gray-600">{{ formatClp(opt.entryFee) }}</p>
                   </div>
                 </label>
@@ -207,14 +206,14 @@
               <div class="flex flex-col gap-2 p-3 border border-primary/40 rounded-lg bg-primary/5">
                 <div>
                   <p class="text-sm font-semibold text-gray-900">Webpay</p>
-                  <p class="text-xs text-gray-600">Credit/debit cards issued in Chile</p>
+                  <p class="text-xs text-gray-600">{{ t('submission.payment.cardsInChile') }}</p>
                 </div>
                 <p class="text-xs text-gray-500">
-                  Can't use Webpay? Contact us directly and we'll help you complete the submission.
+                  {{ t('submission.payment.fallbackHelp') }}
                 </p>
               </div>
               <p v-if="needsPaymentProof" class="mt-2 text-xs text-amber-600">
-                A payment is required before submitting these awards.
+                {{ t('submission.payment.paymentRequired') }}
               </p>
               <div v-if="showTestPaymentToggle" class="mt-3">
                 <label
@@ -473,10 +472,15 @@ const selectionsEqual = (a: string[], b: string[]) => {
   return sortedA.every((key, idx) => key === sortedB[idx]);
 };
 
+const prizeLabel = (key: string) => {
+  const label = t(`submission.prizes.${key}`);
+  return label || key;
+};
+
 const formatPrizeDisplay = (categories?: string[] | string | null, amount?: number | null) => {
   const list = Array.from(new Set(coercePrizeArray(categories)));
   const label = list
-    .map((key) => getPrizeOption(key)?.name || key)
+    .map((key) => prizeLabel(key))
     .filter(Boolean)
     .join(', ');
   const amountLabel = amount ? formatClp(amount) : null;
