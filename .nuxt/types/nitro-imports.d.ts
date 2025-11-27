@@ -20,6 +20,7 @@ declare global {
   const createEvent: typeof import('../../node_modules/h3').createEvent
   const createEventStream: typeof import('../../node_modules/h3').createEventStream
   const createRouter: typeof import('../../node_modules/h3').createRouter
+  const createWebpayCheckout: typeof import('../../server/utils/payments').createWebpayCheckout
   const defaultContentType: typeof import('../../node_modules/h3').defaultContentType
   const defineAppConfig: typeof import('../../node_modules/@nuxt/nitro-server/dist/runtime/utils/config').defineAppConfig
   const defineCachedEventHandler: typeof import('../../node_modules/nitropack/dist/runtime/internal/cache').defineCachedEventHandler
@@ -125,7 +126,14 @@ declare global {
   const useRuntimeConfig: typeof import('../../node_modules/nitropack/dist/runtime/internal/config').useRuntimeConfig
   const useSession: typeof import('../../node_modules/h3').useSession
   const useStorage: typeof import('../../node_modules/nitropack/dist/runtime/internal/storage').useStorage
+  const verifyWebpayCheckout: typeof import('../../server/utils/payments').verifyWebpayCheckout
   const writeEarlyHints: typeof import('../../node_modules/h3').writeEarlyHints
+}
+// for type re-export
+declare global {
+  // @ts-ignore
+  export type { PaymentMethod } from '../../server/utils/payments'
+  import('../../server/utils/payments')
 }
 export { useNitroApp } from 'nitropack/runtime/internal/app';
 export { useRuntimeConfig, useAppConfig } from 'nitropack/runtime/internal/config';
@@ -142,3 +150,4 @@ export { appendCorsHeaders, appendCorsPreflightHeaders, appendHeader, appendHead
 export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '/Users/hongmengzhai/Documents/Coding/nidonestfest/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths';
 export { defineAppConfig } from '/Users/hongmengzhai/Documents/Coding/nidonestfest/node_modules/@nuxt/nitro-server/dist/runtime/utils/config';
 export { getAuth, auth } from '/Users/hongmengzhai/Documents/Coding/nidonestfest/server/utils/auth';
+export { createWebpayCheckout, verifyWebpayCheckout } from '/Users/hongmengzhai/Documents/Coding/nidonestfest/server/utils/payments';

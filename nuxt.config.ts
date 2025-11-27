@@ -26,7 +26,11 @@ export default defineNuxtConfig({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
+    payments: {
+      allowTestMode: process.env.PAYMENTS_ALLOW_TEST_MODE === 'true'
+    },
     public: {
+      enablePaymentTestMode: process.env.NUXT_PUBLIC_PAYMENT_TEST_MODE === 'true'
     }
   }
 });

@@ -19,6 +19,7 @@
                   <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
                   <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Film</th>
                   <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Genre</th>
+                  <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prize</th>
                   <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Runtime
                   </th>
                   <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
@@ -37,6 +38,10 @@
                     <div class="text-sm text-gray-900 font-medium">{{ sub.film_name }}</div>
                   </td>
                   <td class="py-3 px-4 text-sm text-gray-500">{{ sub.genre }}</td>
+                  <td class="py-3 px-4 text-sm text-gray-500">{{ formatPrizeDisplay(sub.prize_categories ||
+                    sub.prize_category,
+                    sub.prize_amount)
+                  }}</td>
                   <td class="py-3 px-4 text-sm text-gray-500">{{ sub.runtime }}</td>
                   <td class="py-3 px-4 text-sm text-gray-500">{{ new Date(sub.created_at).toLocaleDateString() }}</td>
                 </tr>
@@ -45,10 +50,10 @@
           </div>
 
           <Dialog v-model:open="isDialogOpen">
-            <DialogContent class="sm:max-w-[600px] max-h-[85vh] overflow-y-auto">
+            <DialogContent class="sm:max-w-[600px] max-h-[85vh] overflow-y-auto bg-white">
               <DialogHeader>
-                <DialogTitle class="text-xl">{{ selectedSubmission?.film_name }}</DialogTitle>
-                <DialogDescription>
+                <DialogTitle class="text-xl text-gray-900">{{ selectedSubmission?.film_name }}</DialogTitle>
+                <DialogDescription class="text-gray-500">
                   Submitted by {{ selectedSubmission?.full_name }}
                 </DialogDescription>
               </DialogHeader>
@@ -61,7 +66,13 @@
                     <div><span class="text-gray-500">Email:</span> {{ selectedSubmission.email }}</div>
                     <div v-if="selectedSubmission.social_link"><span class="text-gray-500">Social:</span> <a
                         :href="selectedSubmission.social_link" target="_blank" class="text-blue-600 hover:underline">{{
-                        selectedSubmission.social_link }}</a></div>
+                          selectedSubmission.social_link }}</a></div>
+                    <div
+                      v-if="(selectedSubmission.prize_categories || selectedSubmission.prize_category) || selectedSubmission.prize_amount">
+                      <span class="text-gray-500">Prize:</span>
+                      {{ formatPrizeDisplay(selectedSubmission.prize_categories || selectedSubmission.prize_category,
+                        selectedSubmission.prize_amount) }}
+                    </div>
                   </div>
                 </div>
 
@@ -142,7 +153,7 @@
         </div>
 
         <!-- Submission Form -->
-        <form class="bg-white p-6 md:p-8 rounded-lg shadow-md border border-gray-100" @submit.prevent="submitForm">
+        <form class="bg-white p-6 md:p-8 rounded-lg shadow-md border border-gray-100" @submit.prevent="submitForm()">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Full Name -->
             <div class="col-span-1 md:col-span-2">
@@ -163,6 +174,61 @@
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.filmName') }}</label>
               <input v-model="formData.filmName" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
+            </div>
+
+            <!-- Prize Categories / Fees -->
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.prize') }}</label>
+              <p class="text-xs text-gray-500 mb-3">Select one or more awards. You'll be charged the combined
+                entry fee. Award choices lock once your submission is confirmed.</p>
+              <div class="grid gap-3 md:grid-cols-2">
+                <label v-for="opt in prizeOptions" :key="opt.key" :class="['flex items-start gap-3 p-3 border rounded-lg transition cursor-pointer',
+                  formData.prizeCategories.includes(opt.key) ? 'border-primary bg-primary/5' : 'border-gray-200',
+                  awardsLocked ? 'opacity-60 cursor-not-allowed' : '']">
+                  <input type="checkbox" :value="opt.key" v-model="formData.prizeCategories" :disabled="awardsLocked"
+                    class="mt-1" />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">{{ opt.name }}</p>
+                    <p class="text-xs text-gray-600">{{ formatClp(opt.entryFee) }}</p>
+                  </div>
+                </label>
+              </div>
+              <p class="mt-3 text-xs" :class="selectedPrizeTotal ? 'text-gray-600' : 'text-amber-600'">
+                <span v-if="selectedPrizeTotal">{{ t('submission.form.priceToPay') }}:
+                  {{ formatClp(selectedPrizeTotal) }}</span>
+                <span v-else>{{ t('submission.form.prizeRequired') }}</span>
+              </p>
+              <p v-if="awardsLocked" class="mt-2 text-xs text-gray-500">
+                Award selections are locked. Contact the organizers if you need to request changes.
+              </p>
+            </div>
+
+            <div v-if="!awardsLocked && uniqueSelectedPrizes.length" class="col-span-1 md:col-span-2">
+              <div class="flex flex-col gap-2 p-3 border border-primary/40 rounded-lg bg-primary/5">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900">Webpay</p>
+                  <p class="text-xs text-gray-600">Credit/debit cards issued in Chile</p>
+                </div>
+                <p class="text-xs text-gray-500">
+                  Can't use Webpay? Contact us directly and we'll help you complete the submission.
+                </p>
+              </div>
+              <p v-if="needsPaymentProof" class="mt-2 text-xs text-amber-600">
+                A payment is required before submitting these awards.
+              </p>
+              <div v-if="showTestPaymentToggle" class="mt-3">
+                <label
+                  class="flex items-start gap-3 p-3 border border-dashed border-gray-300 rounded-lg bg-gray-50 cursor-pointer">
+                  <input type="checkbox" v-model="testPaymentOverride" class="mt-1" />
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Simulate payment (test mode)</p>
+                    <p class="text-xs text-gray-600">
+                      Skip the Webpay redirect and record this entry with a test payment provider. Use only on staging
+                      or local environments.
+                    </p>
+                  </div>
+                </label>
+              </div>
             </div>
 
             <!-- Genre -->
@@ -189,7 +255,7 @@
             <!-- Production Dates -->
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.productionDates')
-                }}</label>
+              }}</label>
               <input v-model="formData.productionDates" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -204,7 +270,7 @@
             <!-- Shooting Format -->
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.shootingFormat')
-                }}</label>
+              }}</label>
               <input v-model="formData.shootingFormat" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -233,7 +299,7 @@
             <!-- Past Screenings -->
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.pastScreenings')
-                }}</label>
+              }}</label>
               <textarea v-model="formData.pastScreenings" rows="3" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
@@ -241,7 +307,7 @@
             <!-- Additional Info -->
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.additionalInfo')
-                }}</label>
+              }}</label>
               <textarea v-model="formData.additionalInfo" rows="3"
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
@@ -286,16 +352,28 @@ import {
   DialogHeader,
   DialogTitle,
 } from '~/components/ui/dialog';
+import { PRIZE_OPTIONS, getPrizeOption } from '~/lib/prizes';
 
-const { t } = useI18n();
-const pageTitle = computed(() => t('nav.submit'));
-const session = useSession();
+type SubmissionForm = {
+  fullName: string;
+  socialLink: string;
+  filmName: string;
+  synopsis: string;
+  genre: string;
+  runtime: string;
+  productionDates: string;
+  budget: string;
+  shootingFormat: string;
+  aspectRatio: string;
+  language: string;
+  country: string;
+  pastScreenings: string;
+  additionalInfo: string;
+  prizeCategories: string[];
+  webpayToken: string;
+};
 
-useHead(() => ({
-  title: pageTitle.value
-}));
-
-const formData = ref({
+const initialForm: SubmissionForm = {
   fullName: '',
   socialLink: '',
   filmName: '',
@@ -309,8 +387,131 @@ const formData = ref({
   language: '',
   country: '',
   pastScreenings: '',
-  additionalInfo: ''
+  additionalInfo: '',
+  prizeCategories: [],
+  webpayToken: '',
+};
+
+const DRAFT_STORAGE_KEY = 'nidonestfest_submission_draft';
+const isClient = typeof window !== 'undefined';
+
+const { t } = useI18n();
+const runtimeConfig = useRuntimeConfig();
+const pageTitle = computed(() => t('nav.submit'));
+const session = useSession();
+
+useHead(() => ({
+  title: pageTitle.value
+}));
+
+const formData = ref<SubmissionForm>({ ...initialForm });
+const enablePaymentTestMode = computed(() => Boolean(runtimeConfig.public?.enablePaymentTestMode));
+const testPaymentOverride = ref(false);
+const originalPrizeCategories = ref<string[]>([]);
+const originalPrizeAmount = ref<number | null>(null);
+const originalPaymentProvider = ref<string | null>(null);
+const originalPaymentReference = ref<string | null>(null);
+
+const uniqueSelectedPrizes = computed(() => sortPrizeSelection(formData.value.prizeCategories));
+
+const selectedPrizeTotal = computed(() => {
+  return uniqueSelectedPrizes.value.reduce((sum, key) => {
+    const option = getPrizeOption(key);
+    return sum + (option?.entryFee ?? 0);
+  }, 0);
 });
+
+const awardsLocked = computed(() => originalPrizeCategories.value.length > 0);
+
+const hasPaymentProof = computed(() => Boolean(formData.value.webpayToken));
+
+const needsPaymentProof = computed(() => {
+  if (awardsLocked.value) return false;
+  if (testPaymentOverride.value) return false;
+  return uniqueSelectedPrizes.value.length > 0;
+});
+
+const showTestPaymentToggle = computed(
+  () => enablePaymentTestMode.value && !awardsLocked.value && uniqueSelectedPrizes.value.length > 0
+);
+
+const formatClp = (amount?: number | null) => {
+  if (!amount) return '';
+  return new Intl.NumberFormat('es-CL', {
+    style: 'currency',
+    currency: 'CLP',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
+const coercePrizeArray = (value?: string[] | string | null) => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return [];
+    if (trimmed.startsWith('[')) {
+      try {
+        const parsed = JSON.parse(trimmed) as string[];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        console.error('Failed to parse prize categories string', error);
+      }
+    }
+    return [trimmed];
+  }
+  return [];
+};
+
+const sortPrizeSelection = (keys: string[]) => [...new Set(keys)].sort();
+
+const selectionsEqual = (a: string[], b: string[]) => {
+  const sortedA = sortPrizeSelection(a);
+  const sortedB = sortPrizeSelection(b);
+  if (sortedA.length !== sortedB.length) return false;
+  return sortedA.every((key, idx) => key === sortedB[idx]);
+};
+
+const formatPrizeDisplay = (categories?: string[] | string | null, amount?: number | null) => {
+  const list = Array.from(new Set(coercePrizeArray(categories)));
+  const label = list
+    .map((key) => getPrizeOption(key)?.name || key)
+    .filter(Boolean)
+    .join(', ');
+  const amountLabel = amount ? formatClp(amount) : null;
+  if (label && amountLabel) {
+    return `${label} – ${amountLabel}`;
+  }
+  return label || amountLabel || '-';
+};
+
+const formatPaymentProvider = (provider?: string | null) => {
+  if (!provider) return '';
+  if (provider === 'webpay') return 'Webpay';
+  if (provider === 'khipu') return 'Khipu';
+  return provider;
+};
+
+const saveDraft = () => {
+  if (!isClient) return;
+  const { webpayToken, ...rest } = formData.value;
+  window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(rest));
+};
+
+const loadDraft = () => {
+  if (!isClient) return;
+  const raw = window.localStorage.getItem(DRAFT_STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const parsed = JSON.parse(raw) as Partial<SubmissionForm>;
+    formData.value = { ...formData.value, ...parsed };
+  } catch (error) {
+    console.error('Error loading submission draft', error);
+  }
+};
+
+const prizeOptions = PRIZE_OPTIONS;
 
 const loading = ref(false);
 const message = ref('');
@@ -328,11 +529,37 @@ const openDialog = (submission: any) => {
   isDialogOpen.value = true;
 };
 
+const route = useRoute();
+const router = useRouter();
+
+const finalizingPayment = ref(false);
+const PAYMENT_QUERY_KEYS = ['token_ws'];
+
+const clearPaymentQueryParams = () => {
+  if (!isClient) return;
+  const hasPaymentQuery = PAYMENT_QUERY_KEYS.some((key) => key in route.query);
+  if (!hasPaymentQuery) return;
+  const newQuery = { ...route.query } as Record<string, any>;
+  PAYMENT_QUERY_KEYS.forEach((key) => {
+    if (key in newQuery) {
+      delete newQuery[key];
+    }
+  });
+  router.replace({ path: route.path, query: newQuery });
+};
+
 const fetchSubmission = async () => {
   try {
     const data = await $fetch<any>('/api/submission');
     if (data) {
       hasSubmission.value = true;
+      const parsedCategories = sortPrizeSelection(
+        coercePrizeArray(data.prize_categories || data.prize_category)
+      );
+      originalPrizeCategories.value = parsedCategories;
+      originalPrizeAmount.value = data.prize_amount || null;
+      originalPaymentProvider.value = data.payment_provider || null;
+      originalPaymentReference.value = data.payment_reference || null;
       formData.value = {
         fullName: data.full_name,
         socialLink: data.social_link || '',
@@ -347,11 +574,20 @@ const fetchSubmission = async () => {
         language: data.language,
         country: data.country,
         pastScreenings: data.past_screenings,
-        additionalInfo: data.additional_info || ''
+        additionalInfo: data.additional_info || '',
+        prizeCategories: parsedCategories,
+        webpayToken: ''
       };
+    } else {
+      hasSubmission.value = false;
+      originalPrizeCategories.value = [];
+      originalPrizeAmount.value = null;
+      originalPaymentProvider.value = null;
+      originalPaymentReference.value = null;
+      formData.value.webpayToken = '';
     }
   } catch (e) {
-    console.error("Error fetching submission", e);
+    console.error('Error fetching submission', e);
   }
 };
 
@@ -360,7 +596,7 @@ const fetchAdminData = async () => {
     const data = await $fetch<any[]>('/api/admin/submissions');
     adminSubmissions.value = data;
     isAdmin.value = true;
-  } catch (e) {
+  } catch {
     isAdmin.value = false;
   }
 };
@@ -372,7 +608,124 @@ const initData = async () => {
   }
 };
 
-onMounted(initData);
+const redirectToWebpay = (url: string, token: string) => {
+  if (!isClient) return;
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = url;
+  form.style.display = 'none';
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'token_ws';
+  input.value = token;
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+};
+
+const startCheckout = async () => {
+  if (!uniqueSelectedPrizes.value.length) return;
+  try {
+    saveDraft();
+    const sessionResponse = await $fetch<{
+      method: 'webpay';
+      url: string;
+      token: string;
+    }>('/api/payment/create-session', {
+      method: 'POST',
+      body: {
+        prizeCategories: uniqueSelectedPrizes.value,
+        paymentMethod: 'webpay'
+      }
+    });
+
+    redirectToWebpay(sessionResponse.url, sessionResponse.token);
+  } catch (error) {
+    isError.value = true;
+    message.value = t('submission.form.paymentError');
+    console.error(error);
+  }
+};
+
+const submitForm = async (options?: { skipPayment?: boolean }) => {
+  const skipPaymentFlow = Boolean(options?.skipPayment);
+  const hadPaymentProof = hasPaymentProof.value;
+  loading.value = true;
+  if (!skipPaymentFlow) {
+    message.value = '';
+    isError.value = false;
+  }
+
+  try {
+    if (!uniqueSelectedPrizes.value.length) {
+      isError.value = true;
+      message.value = t('submission.form.prizeRequired');
+      return;
+    }
+    if (!skipPaymentFlow && needsPaymentProof.value && !hasPaymentProof.value) {
+      await startCheckout();
+      return;
+    }
+
+    const payload: Record<string, any> = {
+      ...formData.value,
+      prizeCategories: uniqueSelectedPrizes.value,
+      testPaymentBypass: enablePaymentTestMode.value && testPaymentOverride.value && !awardsLocked.value
+    };
+    await $fetch('/api/submission', {
+      method: 'POST',
+      body: payload
+    });
+    message.value = t('submission.form.success');
+    hasSubmission.value = true;
+    if (isAdmin.value) {
+      await fetchAdminData();
+    }
+    await fetchSubmission();
+    if (isClient) {
+      window.localStorage.removeItem(DRAFT_STORAGE_KEY);
+    }
+    formData.value.webpayToken = '';
+    if (!awardsLocked.value) {
+      formData.value.prizeCategories = [];
+    }
+    testPaymentOverride.value = false;
+  } catch (e) {
+    isError.value = true;
+    message.value = t('submission.form.error');
+    console.error(e);
+    if (hadPaymentProof) {
+      formData.value.webpayToken = '';
+    }
+  } finally {
+    clearPaymentQueryParams();
+    loading.value = false;
+  }
+};
+
+const getQueryValue = (value: string | string[] | undefined) =>
+  Array.isArray(value) ? value[0] : value || '';
+
+const attemptFinalizeAfterPayment = async () => {
+  if (!isClient || finalizingPayment.value || !session.value.data) return;
+
+  const webpayToken = getQueryValue(route.query.token_ws);
+  if (!webpayToken) return;
+
+  finalizingPayment.value = true;
+  try {
+    formData.value.webpayToken = webpayToken;
+    await submitForm({ skipPayment: true });
+  } finally {
+    finalizingPayment.value = false;
+  }
+};
+
+onMounted(async () => {
+  loadDraft();
+  await initData();
+  await attemptFinalizeAfterPayment();
+});
 
 watch(session, async (newVal) => {
   if (newVal?.data) {
@@ -380,27 +733,46 @@ watch(session, async (newVal) => {
   }
 });
 
-const submitForm = async () => {
-  loading.value = true;
-  message.value = '';
-  isError.value = false;
-
-  try {
-    await $fetch('/api/submission', {
-      method: 'POST',
-      body: formData.value
-    });
-    message.value = t('submission.form.success');
-    hasSubmission.value = true;
-    if (isAdmin.value) {
-      await fetchAdminData();
-    }
-  } catch (e) {
-    isError.value = true;
-    message.value = t('submission.form.error');
-    console.error(e);
-  } finally {
-    loading.value = false;
+watch(
+  () => [route.query.token_ws, session.value.data],
+  () => {
+    attemptFinalizeAfterPayment();
   }
-};
+);
+
+watch(
+  () => [...formData.value.prizeCategories],
+  (newValue, oldValue) => {
+    const sortedNew = sortPrizeSelection(newValue);
+    if (awardsLocked.value) {
+      if (!selectionsEqual(sortedNew, originalPrizeCategories.value)) {
+        formData.value.prizeCategories = [...originalPrizeCategories.value];
+      }
+      return;
+    }
+
+    const sortedOld = sortPrizeSelection(oldValue || []);
+    if (!selectionsEqual(sortedNew, sortedOld)) {
+      formData.value.webpayToken = '';
+    }
+  },
+  { deep: true }
+);
+
+watch(
+  () => [enablePaymentTestMode.value, awardsLocked.value, uniqueSelectedPrizes.value.length],
+  ([enabled, locked, count]) => {
+    if (!enabled || locked || count === 0) {
+      testPaymentOverride.value = false;
+    }
+  }
+);
+
+watch(
+  formData,
+  () => {
+    saveDraft();
+  },
+  { deep: true }
+);
 </script>

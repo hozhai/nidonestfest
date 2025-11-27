@@ -1,9 +1,65 @@
-import { getDatabase } from "../../db";
-import { auth } from "../../utils/auth";
 import { Pool } from "pg";
 import Database from "better-sqlite3";
+import { getDatabase } from "../../db";
+import { auth } from "../../utils/auth";
+import { verifyWebpayCheckout } from "../../utils/payments";
+import { getPrizeOptionsByKeys } from "../../../lib/prizes";
+
+type ExistingSubmission = {
+  prize_category: string | null;
+  prize_categories: string | null;
+  prize_amount: number | null;
+  payment_provider: string | null;
+  payment_reference: string | null;
+};
+
+type PaymentProof = {
+  webpayToken: string | null;
+};
+
+const extractPaymentProof = (body: Record<string, any>): PaymentProof => {
+  const webpayToken =
+    typeof body.webpayToken === "string" && body.webpayToken.trim().length > 0
+      ? body.webpayToken.trim()
+      : null;
+  return { webpayToken };
+};
+
+const sortPrizeKeys = (keys: string[]) => [...new Set(keys)].sort();
+
+const normalizePrizeKeysInput = (input: unknown): string[] => {
+  if (!Array.isArray(input)) return [];
+  return sortPrizeKeys(
+    input
+      .filter((value): value is string => typeof value === "string")
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0)
+  );
+};
+
+const parseStoredPrizeKeys = (existing: ExistingSubmission | null): string[] => {
+  if (!existing) return [];
+  if (existing.prize_categories) {
+    try {
+      const parsed = JSON.parse(existing.prize_categories) as string[];
+      return Array.isArray(parsed) ? sortPrizeKeys(parsed) : [];
+    } catch (error) {
+      console.error("Failed to parse stored prize categories", error);
+    }
+  }
+  if (existing.prize_category) {
+    return sortPrizeKeys([existing.prize_category]);
+  }
+  return [];
+};
+
+const arraysEqual = (a: string[], b: string[]) => {
+  if (a.length !== b.length) return false;
+  return a.every((value, index) => value === b[index]);
+};
 
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig();
   const session = await auth.api.getSession({
     headers: event.headers,
   });
@@ -15,10 +71,11 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const body = await readBody(event);
+  const body = await readBody<Record<string, any>>(event);
   const userId = session.user.id;
+  const allowServerTestMode = Boolean(config.payments?.allowTestMode);
+  const wantsTestBypass = allowServerTestMode && body.testPaymentBypass === true;
 
-  // Validation
   const mandatoryFields = [
     "fullName",
     "filmName",
@@ -31,18 +88,21 @@ export default defineEventHandler(async (event) => {
     "language",
     "country",
     "pastScreenings",
+    "prizeCategories",
   ];
 
   for (const field of mandatoryFields) {
     if (!body[field]) {
+      const statusMessage =
+        field === "prizeCategories"
+          ? "Award selection is required."
+          : `Missing mandatory field: ${field}`;
       throw createError({
         statusCode: 400,
-        statusMessage: `Missing mandatory field: ${field}`,
+        statusMessage,
       });
     }
   }
-
-  const db = getDatabase();
 
   const {
     fullName,
@@ -61,17 +121,129 @@ export default defineEventHandler(async (event) => {
     additionalInfo,
   } = body;
 
+  const submittedPrizeKeys = normalizePrizeKeysInput(body.prizeCategories);
+  if (submittedPrizeKeys.length === 0) {
+    throw createError({ statusCode: 400, statusMessage: "Please select at least one award." });
+  }
+
+  const prizeOptions = getPrizeOptionsByKeys(submittedPrizeKeys);
+  if (!prizeOptions) {
+    throw createError({ statusCode: 400, statusMessage: "Invalid award selection." });
+  }
+
+  const submittedPrizeTotal = prizeOptions.reduce((sum, prize) => sum + prize.entryFee, 0);
+
+  const { webpayToken } = extractPaymentProof(body);
+
+  const db = getDatabase();
+
+  let existingSubmission: ExistingSubmission | null = null;
+
+  if (db instanceof Pool) {
+    const existingResult = await db.query<ExistingSubmission>(
+      "SELECT prize_category, prize_categories, prize_amount, payment_provider, payment_reference FROM submissions WHERE user_id = $1",
+      [userId]
+    );
+    existingSubmission = existingResult.rows[0] || null;
+  } else if (db instanceof Database) {
+    const existingStmt = db.prepare(
+      "SELECT prize_categories, prize_amount, payment_provider, payment_reference FROM submissions WHERE user_id = ?"
+    );
+    const row = existingStmt.get(userId) as
+      | { prize_categories: string | null; prize_amount: number | null; payment_provider: string | null; payment_reference: string | null }
+      | undefined;
+    existingSubmission = row
+      ? {
+          prize_category: null,
+          prize_categories: row.prize_categories,
+          prize_amount: row.prize_amount,
+          payment_provider: row.payment_provider,
+          payment_reference: row.payment_reference,
+        }
+      : null;
+  }
+
+  const existingPrizeKeys = parseStoredPrizeKeys(existingSubmission);
+  const hasLockedAwards = existingPrizeKeys.length > 0;
+  const canApplyTestBypass = wantsTestBypass && !hasLockedAwards;
+
+  if (hasLockedAwards && !arraysEqual(existingPrizeKeys, submittedPrizeKeys)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Award selections cannot be changed after submission.",
+    });
+  }
+
+  let finalPrizeCategories: string[] = hasLockedAwards ? existingPrizeKeys : [];
+  let finalPrizeAmount: number | null = existingSubmission?.prize_amount || (hasLockedAwards ? submittedPrizeTotal : null);
+  let paymentProvider: string | null = existingSubmission?.payment_provider || null;
+  let paymentReference: string | null = existingSubmission?.payment_reference || null;
+
+  const handlePaymentError = (err: any) => {
+    const message = err?.message || "Payment verification failed";
+    const statusCode = Number(err?.statusCode) || 400;
+    throw createError({ statusCode, statusMessage: message });
+  };
+
+  if (webpayToken) {
+    try {
+      const verification = await verifyWebpayCheckout({ token: webpayToken, userId });
+      const sortedPrizeKeys = sortPrizeKeys(verification.prizeKeys);
+      if (!arraysEqual(sortedPrizeKeys, submittedPrizeKeys)) {
+        throw new Error("Payment does not match the selected awards.");
+      }
+      finalPrizeCategories = sortedPrizeKeys;
+      finalPrizeAmount = verification.amount;
+      paymentProvider = verification.provider;
+      paymentReference = verification.reference;
+    } catch (err) {
+      handlePaymentError(err);
+    }
+  } else if (canApplyTestBypass) {
+    finalPrizeCategories = submittedPrizeKeys;
+    finalPrizeAmount = submittedPrizeTotal;
+    paymentProvider = "test";
+    paymentReference = `TEST-${Date.now().toString(36).toUpperCase()}`;
+  } else if (!hasLockedAwards) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Payment is required before you can submit for these awards.",
+    });
+  } else {
+    finalPrizeCategories = existingPrizeKeys;
+    finalPrizeAmount = existingSubmission?.prize_amount ?? submittedPrizeTotal;
+  }
+
+  if (!finalPrizeCategories.length || !finalPrizeAmount) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Award selection is required.",
+    });
+  }
+
+  const primaryPrizeKey = finalPrizeCategories[0] || null;
+  const serializedPrizeCategories = JSON.stringify(finalPrizeCategories);
+
   try {
     if (db instanceof Pool) {
       const query = `
         INSERT INTO submissions (
-          user_id, full_name, social_link, film_name, synopsis, genre, runtime,
+          user_id, prize_category, prize_categories, prize_amount, payment_provider, payment_reference,
+          full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
           country, past_screenings, additional_info, updated_at
         ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, NOW()
+          $1, $2, $3, $4, $5, $6,
+          $7, $8, $9, $10, $11, $12,
+          $13, $14, $15, $16, $17,
+          $18, $19, $20, NOW()
         )
         ON CONFLICT (user_id) DO UPDATE SET
+          prize_category = EXCLUDED.prize_category,
+          prize_categories = EXCLUDED.prize_categories,
+          prize_amount = EXCLUDED.prize_amount,
+          payment_provider = EXCLUDED.payment_provider,
+          payment_reference = EXCLUDED.payment_reference,
           full_name = EXCLUDED.full_name,
           social_link = EXCLUDED.social_link,
           film_name = EXCLUDED.film_name,
@@ -91,6 +263,11 @@ export default defineEventHandler(async (event) => {
       `;
       const values = [
         userId,
+        primaryPrizeKey,
+        serializedPrizeCategories,
+        finalPrizeAmount,
+        paymentProvider,
+        paymentReference,
         fullName,
         socialLink || null,
         filmName,
@@ -111,13 +288,22 @@ export default defineEventHandler(async (event) => {
     } else if (db instanceof Database) {
       const query = `
         INSERT INTO submissions (
-          user_id, full_name, social_link, film_name, synopsis, genre, runtime,
+          user_id, prize_category, prize_categories, prize_amount, payment_provider, payment_reference,
+          full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
           country, past_screenings, additional_info, updated_at
         ) VALUES (
-          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP
+          ?, ?, ?, ?, ?, ?,
+          ?, ?, ?, ?, ?, ?,
+          ?, ?, ?, ?, ?,
+          ?, ?, ?, CURRENT_TIMESTAMP
         )
         ON CONFLICT(user_id) DO UPDATE SET
+          prize_category = excluded.prize_category,
+          prize_categories = excluded.prize_categories,
+          prize_amount = excluded.prize_amount,
+          payment_provider = excluded.payment_provider,
+          payment_reference = excluded.payment_reference,
           full_name = excluded.full_name,
           social_link = excluded.social_link,
           film_name = excluded.film_name,
@@ -137,6 +323,11 @@ export default defineEventHandler(async (event) => {
       const stmt = db.prepare(query);
       stmt.run(
         userId,
+        primaryPrizeKey,
+        serializedPrizeCategories,
+        finalPrizeAmount,
+        paymentProvider,
+        paymentReference,
         fullName,
         socialLink || null,
         filmName,
@@ -152,8 +343,7 @@ export default defineEventHandler(async (event) => {
         pastScreenings,
         additionalInfo || null
       );
-      
-      // Fetch the updated record to return
+
       const getStmt = db.prepare("SELECT * FROM submissions WHERE user_id = ?");
       return getStmt.get(userId);
     }
