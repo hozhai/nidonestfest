@@ -67,7 +67,31 @@
   "submission": {
     "title": "Submit Your Film",
     "signIn": "Please sign in to access the submission form.",
-    "button": "Sign in with Google"
+    "button": "Sign in with Google",
+    "form": {
+      "fullName": "What's your full name?*",
+      "socialLink": "Social media or website (if applicable)",
+      "filmName": "Name of your film*",
+      "synopsis": "Small synopsis of your film*",
+      "genre": "Genre of film*",
+      "runtime": "Runtime of the film*",
+      "productionDates": "Production dates (start to finish)*",
+      "budget": "Film's budget",
+      "shootingFormat": "Shooting format used*",
+      "aspectRatio": "Aspect ratio*",
+      "language": "Language*",
+      "country": "Country of origin and filming*",
+      "pastScreenings": "Past screening locations*",
+      "additionalInfo": "Anything else to add?",
+      "submit": "Submit Film",
+      "update": "Update Submission",
+      "success": "Submission saved successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "admin": {
+      "title": "All Submissions",
+      "noSubmissions": "No submissions yet."
+    }
   },
   "timeline": {
     "title": "Festival Timeline",

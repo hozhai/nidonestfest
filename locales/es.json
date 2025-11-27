@@ -68,7 +68,31 @@
   "submission": {
     "title": "Envía tu película",
     "signIn": "Por favor inicie sesión para acceder el formulario.",
-    "button": "Iniciar sesión con Google"
+    "button": "Iniciar sesión con Google",
+    "form": {
+      "fullName": "¿Cuál es tu nombre completo?*",
+      "socialLink": "Redes sociales o sitio web (si aplica)",
+      "filmName": "Nombre de tu película*",
+      "synopsis": "Pequeña sinopsis de tu película*",
+      "genre": "Género de la película*",
+      "runtime": "Duración de la película*",
+      "productionDates": "Fechas de producción (inicio a fin)*",
+      "budget": "Presupuesto de la película",
+      "shootingFormat": "Formato de grabación utilizado*",
+      "aspectRatio": "Relación de aspecto*",
+      "language": "Idioma*",
+      "country": "País de origen y filmación*",
+      "pastScreenings": "Ubicaciones de proyecciones anteriores*",
+      "additionalInfo": "¿Algo más que agregar?",
+      "submit": "Enviar Película",
+      "update": "Actualizar Envío",
+      "success": "¡Envío guardado exitosamente!",
+      "error": "Ocurrió un error. Por favor intenta de nuevo."
+    },
+    "admin": {
+      "title": "Todos los Envíos",
+      "noSubmissions": "Aún no hay envíos."
+    }
   },
   "timeline": {
     "title": "Programa del Festival",

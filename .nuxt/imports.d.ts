@@ -32,3 +32,4 @@ export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composab
 export { defineLazyHydrationComponent } from '#app/composables/lazy-hydration';
 export { useI18n, LanguageCode } from '../composables/useI18n';
 export { useGSAP } from '../node_modules/v-gsap-nuxt/dist/runtime/plugin';
+export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';

@@ -18,6 +18,15 @@ interface _GlobalComponents {
   'LanguageSwitcher': typeof import("../../components/LanguageSwitcher.vue")['default']
   'NavBar': typeof import("../../components/NavBar.vue")['default']
   'UiBlurReveal': typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']
+  'UiDialog': typeof import("../../components/ui/dialog/Dialog.vue")['default']
+  'UiDialogClose': typeof import("../../components/ui/dialog/DialogClose.vue")['default']
+  'UiDialogContent': typeof import("../../components/ui/dialog/DialogContent.vue")['default']
+  'UiDialogDescription': typeof import("../../components/ui/dialog/DialogDescription.vue")['default']
+  'UiDialogFooter': typeof import("../../components/ui/dialog/DialogFooter.vue")['default']
+  'UiDialogHeader': typeof import("../../components/ui/dialog/DialogHeader.vue")['default']
+  'UiDialogScrollContent': typeof import("../../components/ui/dialog/DialogScrollContent.vue")['default']
+  'UiDialogTitle': typeof import("../../components/ui/dialog/DialogTitle.vue")['default']
+  'UiDialogTrigger': typeof import("../../components/ui/dialog/DialogTrigger.vue")['default']
   'UiDropdownMenu': typeof import("../../components/ui/dropdown-menu/DropdownMenu.vue")['default']
   'UiDropdownMenuCheckboxItem': typeof import("../../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']
   'UiDropdownMenuContent': typeof import("../../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']
@@ -65,6 +74,15 @@ interface _GlobalComponents {
   'LazyLanguageSwitcher': LazyComponent<typeof import("../../components/LanguageSwitcher.vue")['default']>
   'LazyNavBar': LazyComponent<typeof import("../../components/NavBar.vue")['default']>
   'LazyUiBlurReveal': LazyComponent<typeof import("../../components/ui/blur-reveal/BlurReveal.vue")['default']>
+  'LazyUiDialog': LazyComponent<typeof import("../../components/ui/dialog/Dialog.vue")['default']>
+  'LazyUiDialogClose': LazyComponent<typeof import("../../components/ui/dialog/DialogClose.vue")['default']>
+  'LazyUiDialogContent': LazyComponent<typeof import("../../components/ui/dialog/DialogContent.vue")['default']>
+  'LazyUiDialogDescription': LazyComponent<typeof import("../../components/ui/dialog/DialogDescription.vue")['default']>
+  'LazyUiDialogFooter': LazyComponent<typeof import("../../components/ui/dialog/DialogFooter.vue")['default']>
+  'LazyUiDialogHeader': LazyComponent<typeof import("../../components/ui/dialog/DialogHeader.vue")['default']>
+  'LazyUiDialogScrollContent': LazyComponent<typeof import("../../components/ui/dialog/DialogScrollContent.vue")['default']>
+  'LazyUiDialogTitle': LazyComponent<typeof import("../../components/ui/dialog/DialogTitle.vue")['default']>
+  'LazyUiDialogTrigger': LazyComponent<typeof import("../../components/ui/dialog/DialogTrigger.vue")['default']>
   'LazyUiDropdownMenu': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenu.vue")['default']>
   'LazyUiDropdownMenuCheckboxItem': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue")['default']>
   'LazyUiDropdownMenuContent': LazyComponent<typeof import("../../components/ui/dropdown-menu/DropdownMenuContent.vue")['default']>

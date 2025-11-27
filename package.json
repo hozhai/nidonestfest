@@ -21,6 +21,7 @@
     "better-auth": "^1.4.1",
     "drizzle-orm": "^0.44.7",
     "kysely": "^0.28.8",
+    "lucide-vue-next": "^0.555.0",
     "motion-v": "^1.7.4",
     "nuxt": "^4.2.1",
     "pg": "^8.16.3",

@@ -2,8 +2,10 @@ import { betterAuth } from "better-auth";
 import { Pool } from "pg";
 import Database from "better-sqlite3";
 
-// Use PostgreSQL if DATABASE_URL is set (for migrations), otherwise SQLite
-const db = process.env.DATABASE_URL
+// Use PostgreSQL if DATABASE_URL is set AND we are in production, otherwise SQLite
+const usePostgres = process.env.NODE_ENV === "production" || process.env.USE_POSTGRES === "true";
+
+const db = (usePostgres && process.env.DATABASE_URL)
   ? new Pool({ connectionString: process.env.DATABASE_URL })
   : new Database("sqlite.db");
 
