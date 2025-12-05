@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
   const existingPrizeKeys: string[] = await (async () => {
     if (db instanceof Pool) {
       const result = await (db as Pool).query<{ prize_category: string | null; prize_categories: string | null }>(
-        'SELECT prize_category, prize_categories FROM submissions WHERE user_id = $1 LIMIT 1',
+        'SELECT prize_categories, NULL::text AS prize_category FROM submissions WHERE user_id = $1 LIMIT 1',
         [session.user.id]
       );
       const row = result?.rows?.[0];
@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
     }
     if (db instanceof Database) {
       const stmt = (db as any).prepare(
-        'SELECT prize_category, prize_categories FROM submissions WHERE user_id = ? LIMIT 1'
+        'SELECT prize_categories, NULL AS prize_category FROM submissions WHERE user_id = ? LIMIT 1'
       );
       const row = stmt.get(session.user.id) as { prize_category: string | null; prize_categories: string | null } | undefined;
       return parseStoredPrizeKeys(row || null);
