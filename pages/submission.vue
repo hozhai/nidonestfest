@@ -183,26 +183,26 @@
               <div class="grid gap-3 md:grid-cols-2">
                 <label v-for="opt in prizeOptions" :key="opt.key" :class="['flex items-start gap-3 p-3 border rounded-lg transition cursor-pointer',
                   formData.prizeCategories.includes(opt.key) ? 'border-primary bg-primary/5' : 'border-gray-200',
-                  awardsLocked ? 'opacity-60 cursor-not-allowed' : '']">
-                  <input type="checkbox" :value="opt.key" v-model="formData.prizeCategories" :disabled="awardsLocked"
-                    class="mt-1" />
+                  hasLockedAwards && isLockedPrize(opt.key) ? 'opacity-60 cursor-not-allowed' : '']">
+                  <input v-model="formData.prizeCategories" type="checkbox" :value="opt.key"
+                    :disabled="hasLockedAwards && isLockedPrize(opt.key)" class="mt-1" />
                   <div>
                     <p class="text-sm font-semibold text-gray-900">{{ prizeLabel(opt.key) }}</p>
                     <p class="text-xs text-gray-600">{{ formatClp(opt.entryFee) }}</p>
                   </div>
                 </label>
               </div>
-              <p class="mt-3 text-xs" :class="selectedPrizeTotal ? 'text-gray-600' : 'text-amber-600'">
-                <span v-if="selectedPrizeTotal">{{ t('submission.form.priceToPay') }}:
-                  {{ formatClp(selectedPrizeTotal) }}</span>
+              <p class="mt-3 text-xs" :class="paymentAmount ? 'text-gray-600' : 'text-amber-600'">
+                <span v-if="paymentAmount">{{ t('submission.form.priceToPay') }}:
+                  {{ formatClp(paymentAmount) }}</span>
                 <span v-else>{{ t('submission.form.prizeRequired') }}</span>
               </p>
-              <p v-if="awardsLocked" class="mt-2 text-xs text-gray-500">
-                Award selections are locked. Contact the organizers if you need to request changes.
+              <p v-if="hasLockedAwards" class="mt-2 text-xs text-gray-500">
+                Paid awards stay selected. You can add more categories and pay the difference.
               </p>
             </div>
 
-            <div v-if="!awardsLocked && uniqueSelectedPrizes.length" class="col-span-1 md:col-span-2">
+            <div v-if="uniqueSelectedPrizes.length" class="col-span-1 md:col-span-2">
               <div class="flex flex-col gap-2 p-3 border border-primary/40 rounded-lg bg-primary/5">
                 <div>
                   <p class="text-sm font-semibold text-gray-900">Webpay</p>
@@ -218,7 +218,7 @@
               <div v-if="showTestPaymentToggle" class="mt-3">
                 <label
                   class="flex items-start gap-3 p-3 border border-dashed border-gray-300 rounded-lg bg-gray-50 cursor-pointer">
-                  <input type="checkbox" v-model="testPaymentOverride" class="mt-1" />
+                  <input v-model="testPaymentOverride" type="checkbox" class="mt-1" />
                   <div>
                     <p class="text-sm font-semibold text-gray-900">Simulate payment (test mode)</p>
                     <p class="text-xs text-gray-600">
@@ -413,6 +413,10 @@ const originalPaymentReference = ref<string | null>(null);
 
 const uniqueSelectedPrizes = computed(() => sortPrizeSelection(formData.value.prizeCategories));
 
+const lockedPrizeKeys = computed(() => sortPrizeSelection(originalPrizeCategories.value));
+
+const isLockedPrize = (key: string) => lockedPrizeKeys.value.includes(key);
+
 const selectedPrizeTotal = computed(() => {
   return uniqueSelectedPrizes.value.reduce((sum, key) => {
     const option = getPrizeOption(key);
@@ -420,18 +424,35 @@ const selectedPrizeTotal = computed(() => {
   }, 0);
 });
 
-const awardsLocked = computed(() => originalPrizeCategories.value.length > 0);
+const addedPrizeKeys = computed(() =>
+  uniqueSelectedPrizes.value.filter((key) => !isLockedPrize(key))
+);
+
+const addedPrizeTotal = computed(() => {
+  return addedPrizeKeys.value.reduce((sum, key) => {
+    const option = getPrizeOption(key);
+    return sum + (option?.entryFee ?? 0);
+  }, 0);
+});
+
+const hasLockedAwards = computed(() => lockedPrizeKeys.value.length > 0);
+
+const paymentAmount = computed(() => {
+  if (hasLockedAwards.value) {
+    return addedPrizeTotal.value;
+  }
+  return selectedPrizeTotal.value;
+});
 
 const hasPaymentProof = computed(() => Boolean(formData.value.webpayToken));
 
 const needsPaymentProof = computed(() => {
-  if (awardsLocked.value) return false;
   if (testPaymentOverride.value) return false;
-  return uniqueSelectedPrizes.value.length > 0;
+  return paymentAmount.value > 0;
 });
 
 const showTestPaymentToggle = computed(
-  () => enablePaymentTestMode.value && !awardsLocked.value && uniqueSelectedPrizes.value.length > 0
+  () => enablePaymentTestMode.value && paymentAmount.value > 0
 );
 
 const formatClp = (amount?: number | null) => {
@@ -629,6 +650,9 @@ const redirectToWebpay = (url: string, token: string) => {
 
 const startCheckout = async () => {
   if (!uniqueSelectedPrizes.value.length) return;
+  if (paymentAmount.value <= 0) {
+    return;
+  }
   try {
     saveDraft();
     const sessionResponse = await $fetch<{
@@ -674,7 +698,7 @@ const submitForm = async (options?: { skipPayment?: boolean }) => {
     const payload: Record<string, any> = {
       ...formData.value,
       prizeCategories: uniqueSelectedPrizes.value,
-      testPaymentBypass: enablePaymentTestMode.value && testPaymentOverride.value && !awardsLocked.value
+      testPaymentBypass: enablePaymentTestMode.value && testPaymentOverride.value && paymentAmount.value > 0
     };
     await $fetch('/api/submission', {
       method: 'POST',
@@ -690,7 +714,7 @@ const submitForm = async (options?: { skipPayment?: boolean }) => {
       window.localStorage.removeItem(DRAFT_STORAGE_KEY);
     }
     formData.value.webpayToken = '';
-    if (!awardsLocked.value) {
+    if (!hasLockedAwards.value) {
       formData.value.prizeCategories = [];
     }
     testPaymentOverride.value = false;
@@ -707,8 +731,8 @@ const submitForm = async (options?: { skipPayment?: boolean }) => {
   }
 };
 
-const getQueryValue = (value: string | string[] | undefined) =>
-  Array.isArray(value) ? value[0] : value || '';
+const getQueryValue = (value: string | null | (string | null)[] | undefined) =>
+  Array.isArray(value) ? (value[0] || '') : (value || '');
 
 const attemptFinalizeAfterPayment = async () => {
   if (!isClient || finalizingPayment.value || !session.value.data) return;
@@ -748,10 +772,10 @@ watch(
   () => [...formData.value.prizeCategories],
   (newValue, oldValue) => {
     const sortedNew = sortPrizeSelection(newValue);
-    if (awardsLocked.value) {
-      if (!selectionsEqual(sortedNew, originalPrizeCategories.value)) {
-        formData.value.prizeCategories = [...originalPrizeCategories.value];
-      }
+    const enforced = sortPrizeSelection([...sortedNew, ...lockedPrizeKeys.value]);
+
+    if (!selectionsEqual(sortedNew, enforced)) {
+      formData.value.prizeCategories = enforced;
       return;
     }
 
@@ -764,9 +788,9 @@ watch(
 );
 
 watch(
-  () => [enablePaymentTestMode.value, awardsLocked.value, uniqueSelectedPrizes.value.length],
-  ([enabled, locked, count]) => {
-    if (!enabled || locked || count === 0) {
+  () => [enablePaymentTestMode.value, hasLockedAwards.value, paymentAmount.value],
+  ([enabled, _locked, amount]) => {
+    if (!enabled || amount <= 0) {
       testPaymentOverride.value = false;
     }
   }

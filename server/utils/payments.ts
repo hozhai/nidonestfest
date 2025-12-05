@@ -93,7 +93,7 @@ const getPaymentIntent = async (token: string) => {
     );
     return mapIntentRow(result.rows[0] || null);
   }
-  const stmt = (db as Database).prepare("SELECT * FROM payment_intents WHERE token = ?");
+  const stmt = (db as any).prepare("SELECT * FROM payment_intents WHERE token = ?");
   return mapIntentRow(stmt.get(token) as PaymentIntentRecord | undefined);
 };
 
@@ -102,7 +102,7 @@ const deletePaymentIntent = async (token: string) => {
   if (db instanceof Pool) {
     await db.query("DELETE FROM payment_intents WHERE token = $1", [token]);
   } else {
-    (db as Database).prepare("DELETE FROM payment_intents WHERE token = ?").run(token);
+    (db as any).prepare("DELETE FROM payment_intents WHERE token = ?").run(token);
   }
 };
 

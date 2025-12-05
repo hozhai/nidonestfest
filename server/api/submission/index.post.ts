@@ -165,17 +165,25 @@ export default defineEventHandler(async (event) => {
 
   const existingPrizeKeys = parseStoredPrizeKeys(existingSubmission);
   const hasLockedAwards = existingPrizeKeys.length > 0;
-  const canApplyTestBypass = wantsTestBypass && !hasLockedAwards;
+  const canApplyTestBypass = wantsTestBypass;
 
-  if (hasLockedAwards && !arraysEqual(existingPrizeKeys, submittedPrizeKeys)) {
+  const missingLocked = existingPrizeKeys.filter((key) => !submittedPrizeKeys.includes(key));
+  if (missingLocked.length > 0) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Award selections cannot be changed after submission.",
+      statusMessage: "Previously paid awards cannot be removed.",
     });
   }
 
+  const newPrizeKeys = submittedPrizeKeys.filter((key) => !existingPrizeKeys.includes(key));
+  const newPrizeOptions = getPrizeOptionsByKeys(newPrizeKeys);
+  if (!newPrizeOptions && newPrizeKeys.length > 0) {
+    throw createError({ statusCode: 400, statusMessage: "Invalid award selection." });
+  }
+  const newPrizeTotal = newPrizeOptions?.reduce((sum, prize) => sum + prize.entryFee, 0) || 0;
+
   let finalPrizeCategories: string[] = hasLockedAwards ? existingPrizeKeys : [];
-  let finalPrizeAmount: number | null = existingSubmission?.prize_amount || (hasLockedAwards ? submittedPrizeTotal : null);
+  let finalPrizeAmount: number = existingSubmission?.prize_amount || 0;
   let paymentProvider: string | null = existingSubmission?.payment_provider || null;
   let paymentReference: string | null = existingSubmission?.payment_reference || null;
 
@@ -193,24 +201,24 @@ export default defineEventHandler(async (event) => {
         throw new Error("Payment does not match the selected awards.");
       }
       finalPrizeCategories = sortedPrizeKeys;
-      finalPrizeAmount = verification.amount;
+      finalPrizeAmount = (existingSubmission?.prize_amount || 0) + verification.amount;
       paymentProvider = verification.provider;
       paymentReference = verification.reference;
     } catch (err) {
       handlePaymentError(err);
     }
-  } else if (canApplyTestBypass) {
+  } else if (canApplyTestBypass && newPrizeKeys.length > 0) {
     finalPrizeCategories = submittedPrizeKeys;
-    finalPrizeAmount = submittedPrizeTotal;
+    finalPrizeAmount = (existingSubmission?.prize_amount || 0) + newPrizeTotal;
     paymentProvider = "test";
     paymentReference = `TEST-${Date.now().toString(36).toUpperCase()}`;
-  } else if (!hasLockedAwards) {
+  } else if (newPrizeKeys.length > 0) {
     throw createError({
       statusCode: 400,
       statusMessage: "Payment is required before you can submit for these awards.",
     });
   } else {
-    finalPrizeCategories = existingPrizeKeys;
+    finalPrizeCategories = submittedPrizeKeys;
     finalPrizeAmount = existingSubmission?.prize_amount ?? submittedPrizeTotal;
   }
 
