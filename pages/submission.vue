@@ -788,7 +788,7 @@ watch(
 );
 
 watch(
-  () => [enablePaymentTestMode.value, hasLockedAwards.value, paymentAmount.value],
+  [enablePaymentTestMode, hasLockedAwards, paymentAmount],
   ([enabled, _locked, amount]) => {
     if (!enabled || amount <= 0) {
       testPaymentOverride.value = false;
