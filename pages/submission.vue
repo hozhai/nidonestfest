@@ -41,7 +41,7 @@
                   <td class="py-3 px-4 text-sm text-gray-500">{{ formatPrizeDisplay(sub.prize_categories ||
                     sub.prize_category,
                     sub.prize_amount)
-                  }}</td>
+                    }}</td>
                   <td class="py-3 px-4 text-sm text-gray-500">{{ sub.runtime }}</td>
                   <td class="py-3 px-4 text-sm text-gray-500">{{ new Date(sub.created_at).toLocaleDateString() }}</td>
                 </tr>
@@ -254,7 +254,7 @@
             <!-- Production Dates -->
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.productionDates')
-              }}</label>
+                }}</label>
               <input v-model="formData.productionDates" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -269,7 +269,7 @@
             <!-- Shooting Format -->
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.shootingFormat')
-              }}</label>
+                }}</label>
               <input v-model="formData.shootingFormat" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -298,7 +298,7 @@
             <!-- Past Screenings -->
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.pastScreenings')
-              }}</label>
+                }}</label>
               <textarea v-model="formData.pastScreenings" rows="3" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
@@ -306,15 +306,30 @@
             <!-- Additional Info -->
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.additionalInfo')
-              }}</label>
+                }}</label>
               <textarea v-model="formData.additionalInfo" rows="3"
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
           </div>
 
+          <!-- Terms and Conditions (first submission only) -->
+          <div v-if="!hasSubmission" class="mt-6">
+            <label class="flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition"
+              :class="termsAccepted ? 'border-primary bg-primary/5' : 'border-gray-200'">
+              <input v-model="termsAccepted" type="checkbox" class="mt-1" />
+              <div>
+                <p class="text-sm text-gray-900">
+                  {{ t('submission.form.termsLabel') }}
+                  <a href="/tc" target="_blank" class="text-primary underline hover:text-primary/80">{{
+                    t('submission.form.termsLink') }}</a>.
+                </p>
+              </div>
+            </label>
+          </div>
+
           <!-- Submit Button & Messages -->
           <div class="mt-8 flex flex-col items-center">
-            <button type="submit" :disabled="loading"
+            <button type="submit" :disabled="loading || (!hasSubmission && !termsAccepted)"
               class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
               {{ loading ? 'Saving...' : (hasSubmission ? t('submission.form.update') : t('submission.form.submit')) }}
             </button>
@@ -544,6 +559,7 @@ const isError = ref(false);
 const adminSubmissions = ref<any[]>([]);
 const isAdmin = ref(false);
 const hasSubmission = ref(false);
+const termsAccepted = ref(false);
 
 // Dialog state
 const isDialogOpen = ref(false);

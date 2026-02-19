@@ -7,14 +7,12 @@
     "about": "Sobre",
     "submit": "Enviar película",
     "judges": "Jueces",
-    "timeline": "Programa",
     "videos": "Videos",
     "account": {
       "signIn": "Iniciar sesión",
       "signOut": "Cerrar sesión",
       "myAccount": "Mi Cuenta"
     }
-
   },
   "language": {
     "english": "English",
@@ -93,7 +91,9 @@
       "submit": "Enviar Película",
       "update": "Actualizar Envío",
       "success": "¡Envío guardado exitosamente!",
-      "error": "Ocurrió un error. Por favor intenta de nuevo."
+      "error": "Ocurrió un error. Por favor intenta de nuevo.",
+      "termsLabel": "He leído y acepto los",
+      "termsLink": "términos y condiciones"
     },
     "admin": {
       "title": "Todos los Envíos",
@@ -115,9 +115,35 @@
       "paymentRequired": "Se requiere un pago antes de enviar estas categorías."
     }
   },
-  "timeline": {
-    "title": "Programa del Festival",
-    "pending": "Programa de eventos próximamente..."
+  "toc": {
+    "title": "Términos y Condiciones",
+    "lastUpdated": "Última actualización: febrero 2026",
+    "sections": {
+      "general": {
+        "title": "General",
+        "content": "Contenido pendiente."
+      },
+      "eligibility": {
+        "title": "Elegibilidad",
+        "content": "Contenido pendiente."
+      },
+      "submissions": {
+        "title": "Envíos",
+        "content": "Contenido pendiente."
+      },
+      "fees": {
+        "title": "Tarifas y Pagos",
+        "content": "Contenido pendiente."
+      },
+      "rights": {
+        "title": "Derechos y Propiedad",
+        "content": "Contenido pendiente."
+      },
+      "liability": {
+        "title": "Responsabilidad",
+        "content": "Contenido pendiente."
+      }
+    }
   },
   "videos": {
     "title": "Videos Destacados",

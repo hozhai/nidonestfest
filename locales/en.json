@@ -92,7 +92,9 @@
       "submit": "Submit Film",
       "update": "Update Submission",
       "success": "Submission saved successfully!",
-      "error": "An error occurred. Please try again."
+      "error": "An error occurred. Please try again.",
+      "termsLabel": "I have read and accept the",
+      "termsLink": "terms and conditions"
     },
     "admin": {
       "title": "All Submissions",
@@ -112,6 +114,36 @@
       "cardsInChile": "Credit/debit cards issued in Chile",
       "fallbackHelp": "Can't use Webpay? Contact us directly and we'll help you complete the submission.",
       "paymentRequired": "A payment is required before submitting these awards."
+    }
+  },
+  "toc": {
+    "title": "Terms & Conditions",
+    "lastUpdated": "Last updated: February 2026",
+    "sections": {
+      "general": {
+        "title": "General",
+        "content": "Content pending."
+      },
+      "eligibility": {
+        "title": "Eligibility",
+        "content": "Content pending."
+      },
+      "submissions": {
+        "title": "Submissions",
+        "content": "Content pending."
+      },
+      "fees": {
+        "title": "Fees & Payments",
+        "content": "Content pending."
+      },
+      "rights": {
+        "title": "Rights & Ownership",
+        "content": "Content pending."
+      },
+      "liability": {
+        "title": "Liability",
+        "content": "Content pending."
+      }
     }
   },
   "videos": {
