@@ -84,10 +84,8 @@
       "pastScreenings": "Past screening locations*",
       "additionalInfo": "Anything else to add?",
       "prize": "Prize Categories*",
-      "prizeInstructions": "Select one or more awards. You'll be charged the combined entry fee. Award choices lock once your submission is confirmed.",
+      "prizeInstructions": "Select one or more awards for your submission.",
       "prizeSelect": "Select one or more awards",
-      "priceToPay": "Entry fee",
-      "paymentError": "We couldn't start the payment flow. Please try again.",
       "prizeRequired": "Please select an award category.",
       "submit": "Submit Film",
       "update": "Update Submission",
@@ -109,40 +107,47 @@
       "best_acting": "Best Acting in a Narrative Picture",
       "best_documentary": "Best Documentary Picture",
       "best_use_music": "Best Use of Music"
-    },
-    "payment": {
-      "cardsInChile": "Credit/debit cards issued in Chile",
-      "fallbackHelp": "Can't use Webpay? Contact us directly and we'll help you complete the submission.",
-      "paymentRequired": "A payment is required before submitting these awards."
     }
   },
   "toc": {
     "title": "Terms & Conditions",
-    "lastUpdated": "Last updated: February 2026",
+    "lastUpdated": "Last updated: March 2026",
+    "intro": "By submitting a film to NestFest, you agree to the following terms and conditions:",
+    "contact": "For any questions, please contact: jonashekel@students.nido.cl",
     "sections": {
-      "general": {
-        "title": "General",
-        "content": "Content pending."
-      },
       "eligibility": {
-        "title": "Eligibility",
-        "content": "Content pending."
+        "title": "1. Eligibility",
+        "content": "Submissions must be created by students currently enrolled in a secondary or post-secondary institution, or who have graduated within the past 12 months. The festival reserves the right to request proof of student status."
       },
-      "submissions": {
-        "title": "Submissions",
-        "content": "Content pending."
+      "originality": {
+        "title": "2. Originality & Rights",
+        "content1": "Entrants must hold full rights to all content within their film, including music, images, and performances. By submitting, you confirm that your work does not infringe on any copyright, trademark, or intellectual property rights.",
+        "content2": "In cases where a college, university, or other institution retains full or partial ownership of the submitted film or any of its components (including as part of coursework, equipment use agreements, or institutional policies), the entrant must have obtained all required permissions from that institution to submit the work to the festival. By submitting, you confirm that such permissions have been secured and that the screening and promotional use of the film by the festival does not violate any institutional agreements or intellectual property policies.",
+        "content3": "Entrants further warrant that their submission does not infringe on any copyright, trademark, or other intellectual property rights."
       },
-      "fees": {
-        "title": "Fees & Payments",
-        "content": "Content pending."
+      "contentGuidelines": {
+        "title": "3. Content Guidelines",
+        "content": "Films must not contain unlawful, defamatory, or excessively explicit material. The festival reserves the right to disqualify any submission deemed inappropriate or not aligned with the festival's values."
       },
-      "rights": {
-        "title": "Rights & Ownership",
-        "content": "Content pending."
+      "submissionFormat": {
+        "title": "4. Submission Format",
+        "content": "All films must be submitted in the specified digital format and within the stated runtime limits. Late or incomplete submissions may not be considered."
+      },
+      "usageRights": {
+        "title": "5. Usage Rights",
+        "content": "By submitting, you grant the festival a non-exclusive, royalty-free license to screen your film during the festival and to use excerpts, stills, and your film's title for promotional purposes."
+      },
+      "judging": {
+        "title": "6. Judging & Selection",
+        "content": "All submissions will be reviewed by a panel of judges. Decisions regarding selection and awards are final and not subject to appeal."
       },
       "liability": {
-        "title": "Liability",
-        "content": "Content pending."
+        "title": "7. Liability",
+        "content": "The festival is not responsible for any technical issues, data loss, or damages related to submission materials."
+      },
+      "agreement": {
+        "title": "8. Agreement",
+        "content": "Submission of a film constitutes full acceptance of these terms and conditions."
       }
     }
   },

@@ -28,7 +28,6 @@
     "nuxt": "^4.3.1",
     "pg": "^8.18.0",
     "reka-ui": "^2.8.0",
-    "transbank-sdk": "^6.1.1",
     "v-gsap-nuxt": "1.4.4"
   },
   "devDependencies": {

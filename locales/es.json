@@ -83,10 +83,8 @@
       "pastScreenings": "Ubicaciones de proyecciones anteriores*",
       "additionalInfo": "¿Algo más que agregar?",
       "prize": "Categorías de premio*",
-      "prizeInstructions": "Selecciona uno o más premios. Se cobrará la tarifa combinada de inscripción. Las opciones se bloquean cuando confirmas tu envío.",
+      "prizeInstructions": "Selecciona una o más categorías para tu envío.",
       "prizeSelect": "Seleccione uno o más premios",
-      "priceToPay": "Cuota de inscripción",
-      "paymentError": "No pudimos iniciar el pago. Inténtalo nuevamente.",
       "prizeRequired": "Por favor selecciona una categoría de premio.",
       "submit": "Enviar Película",
       "update": "Actualizar Envío",
@@ -108,40 +106,47 @@
       "best_acting": "Mejor Actuación en Película Narrativa",
       "best_documentary": "Mejor Película Documental",
       "best_use_music": "Mejor Uso de la Música"
-    },
-    "payment": {
-      "cardsInChile": "Tarjetas de crédito/débito emitidas en Chile",
-      "fallbackHelp": "¿No puedes usar Webpay? Contáctanos directamente y te ayudaremos a completar el envío.",
-      "paymentRequired": "Se requiere un pago antes de enviar estas categorías."
     }
   },
   "toc": {
     "title": "Términos y Condiciones",
-    "lastUpdated": "Última actualización: febrero 2026",
+    "lastUpdated": "Última actualización: marzo 2026",
+    "intro": "Al enviar una película a NestFest, aceptas los siguientes términos y condiciones:",
+    "contact": "Si tienes preguntas, por favor contacta a: jonashekel@students.nido.cl",
     "sections": {
-      "general": {
-        "title": "General",
-        "content": "Contenido pendiente."
-      },
       "eligibility": {
-        "title": "Elegibilidad",
-        "content": "Contenido pendiente."
+        "title": "1. Elegibilidad",
+        "content": "Las postulaciones deben ser creadas por estudiantes actualmente matriculados en una institución de educación secundaria o superior, o que se hayan graduado dentro de los últimos 12 meses. El festival se reserva el derecho de solicitar comprobante de condición de estudiante."
       },
-      "submissions": {
-        "title": "Envíos",
-        "content": "Contenido pendiente."
+      "originality": {
+        "title": "2. Originalidad y Derechos",
+        "content1": "Los participantes deben tener todos los derechos sobre el contenido de su película, incluyendo música, imágenes e interpretaciones. Al enviar la obra, confirmas que no infringe derechos de autor, marcas registradas ni derechos de propiedad intelectual.",
+        "content2": "En los casos en que un colegio, universidad u otra institución conserve la propiedad total o parcial de la película enviada o de cualquiera de sus componentes (incluyendo trabajos de curso, acuerdos de uso de equipos o políticas institucionales), el participante debe haber obtenido todos los permisos necesarios de dicha institución para presentar la obra al festival. Al enviar la obra, confirmas que dichos permisos han sido obtenidos y que la exhibición y el uso promocional de la película por parte del festival no vulneran acuerdos institucionales ni políticas de propiedad intelectual.",
+        "content3": "Además, los participantes garantizan que su envío no infringe derechos de autor, marcas registradas ni otros derechos de propiedad intelectual."
       },
-      "fees": {
-        "title": "Tarifas y Pagos",
-        "content": "Contenido pendiente."
+      "contentGuidelines": {
+        "title": "3. Lineamientos de Contenido",
+        "content": "Las películas no deben contener material ilegal, difamatorio o excesivamente explícito. El festival se reserva el derecho de descalificar cualquier envío que se considere inapropiado o no alineado con los valores del festival."
       },
-      "rights": {
-        "title": "Derechos y Propiedad",
-        "content": "Contenido pendiente."
+      "submissionFormat": {
+        "title": "4. Formato de Envío",
+        "content": "Todas las películas deben enviarse en el formato digital especificado y dentro de los límites de duración establecidos. Los envíos tardíos o incompletos podrían no ser considerados."
+      },
+      "usageRights": {
+        "title": "5. Derechos de Uso",
+        "content": "Al enviar tu película, otorgas al festival una licencia no exclusiva y libre de regalías para exhibirla durante el festival y para usar extractos, imágenes fijas y el título de tu película con fines promocionales."
+      },
+      "judging": {
+        "title": "6. Jurado y Selección",
+        "content": "Todos los envíos serán revisados por un panel de jueces. Las decisiones sobre selección y premios son finales y no están sujetas a apelación."
       },
       "liability": {
-        "title": "Responsabilidad",
-        "content": "Contenido pendiente."
+        "title": "7. Responsabilidad",
+        "content": "El festival no es responsable por problemas técnicos, pérdida de datos ni daños relacionados con los materiales enviados."
+      },
+      "agreement": {
+        "title": "8. Aceptación",
+        "content": "El envío de una película constituye la aceptación total de estos términos y condiciones."
       }
     }
   },

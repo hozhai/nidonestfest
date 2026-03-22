@@ -1,17 +1,16 @@
 export type PrizeOption = {
   key: string;
-  entryFee: number;
 };
 
 export const PRIZE_OPTIONS: PrizeOption[] = [
-  { key: "best_narrative", entryFee: 20000 },
-  { key: "best_cinematography", entryFee: 15000 },
-  { key: "best_editing", entryFee: 15000 },
-  { key: "best_screenwriting", entryFee: 15000 },
-  { key: "best_sound", entryFee: 15000 },
-  { key: "best_acting", entryFee: 15000 },
-  { key: "best_documentary", entryFee: 20000 },
-  { key: "best_use_music", entryFee: 15000 },
+  { key: "best_narrative" },
+  { key: "best_cinematography" },
+  { key: "best_editing" },
+  { key: "best_screenwriting" },
+  { key: "best_sound" },
+  { key: "best_acting" },
+  { key: "best_documentary" },
+  { key: "best_use_music" },
 ];
 
 export const getPrizeOption = (key?: string | null) =>
@@ -19,7 +18,11 @@ export const getPrizeOption = (key?: string | null) =>
 
 export const getPrizeOptionsByKeys = (keys: string[]) => {
   const uniqueKeys = Array.from(
-    new Set(keys.filter((key) => typeof key === "string" && key.trim().length > 0).map((key) => key.trim()))
+    new Set(
+      keys
+        .filter((key) => typeof key === "string" && key.trim().length > 0)
+        .map((key) => key.trim()),
+    ),
   );
 
   const options: PrizeOption[] = [];
@@ -32,10 +35,4 @@ export const getPrizeOptionsByKeys = (keys: string[]) => {
   }
 
   return options;
-};
-
-export const calculatePrizeTotal = (keys: string[]) => {
-  const options = getPrizeOptionsByKeys(keys);
-  if (!options) return null;
-  return options.reduce((sum, prize) => sum + prize.entryFee, 0);
 };
