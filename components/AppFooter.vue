@@ -15,10 +15,11 @@
             </li>
             <li>
               <NuxtLink class="hover:text-highlight transition-all duration-300" to="/submission">{{ t('nav.submit')
-                }}</NuxtLink>
+              }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink class="hover:text-highlight transition-all duration-300" to="/judges">{{ t('nav.judges') }}
+              <NuxtLink class="hover:text-highlight transition-all duration-300" to="/about#judges">{{ t('nav.judges')
+                }}
               </NuxtLink>
             </li>
             <li>

@@ -5,11 +5,8 @@
 
       <ul class="hidden md:flex list-none gap-8 items-center">
         <li v-for="item in navItems" :key="item.to">
-          <NuxtLink
-            :to="item.to"
-            class="text-white transition hover:text-highlight"
-            :class="{ 'text-highlight font-bold': item.active }"
-          >
+          <NuxtLink :to="item.to" class="text-white transition hover:text-highlight"
+            :class="{ 'text-highlight font-bold': item.active }">
             {{ item.label }}
           </NuxtLink>
         </li>
@@ -17,139 +14,86 @@
 
       <div class="flex items-center gap-3">
         <div class="hidden md:flex items-center gap-2">
-          <button
-            v-if="!session.data"
-            class="text-white px-3 py-1 rounded text-md cursor-pointer flex items-center"
-            @click="signIn.social({ provider: 'google' })"
-          >
+          <button v-if="!session.data" class="text-white px-3 py-1 rounded text-md cursor-pointer flex items-center"
+            @click="signIn.social({ provider: 'google' })">
             <Icon name="lucide:log-in" />
           </button>
           <div v-else class="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger class="cursor-pointer">
-                <img
-                  v-if="session.data.user.image"
-                  :src="session.data.user.image"
-                  class="w-8 h-8 rounded-full"
-                />
+                <img v-if="session.data.user.image" :src="session.data.user.image" class="w-8 h-8 rounded-full" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>{{
                   t("nav.account.myAccount")
                 }}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  @click="
-                    signOut({
-                      fetchOptions: {
-                        onSuccess: () => {
-                          router.push('/');
-                        },
+                <DropdownMenuItem @click="
+                  signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        router.push('/');
                       },
-                    })
-                  "
-                  >{{ t("nav.account.signOut") }}</DropdownMenuItem
-                >
+                    },
+                  })
+                  ">{{ t("nav.account.signOut") }}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
 
         <div class="hidden md:flex gap-2">
-          <button
-            v-for="option in languageOptions"
-            :key="option.code"
-            type="button"
-            :class="languageButtonClasses(option.code)"
-            @click="setLanguage(option.code)"
-          >
+          <button v-for="option in languageOptions" :key="option.code" type="button"
+            :class="languageButtonClasses(option.code)" @click="setLanguage(option.code)">
             {{ t(option.labelKey) }}
           </button>
         </div>
 
-        <button
-          aria-label="Toggle menu"
-          class="md:hidden flex flex-col gap-1 cursor-pointer z-50"
-          type="button"
-          :aria-expanded="menuOpen"
-          @click="menuOpen = !menuOpen"
-        >
-          <span
-            class="w-6 h-0.5 transition-transform"
-            :class="
-              menuOpen ? '-rotate-45 translate-y-1.5 bg-white' : 'bg-white'
-            "
-          />
-          <span
-            class="w-6 h-0.5 bg-white transition-opacity"
-            :class="{ 'opacity-0': menuOpen }"
-          />
-          <span
-            class="w-6 h-0.5 transition-transform"
-            :class="
-              menuOpen ? 'rotate-45 -translate-y-1.5 bg-white' : 'bg-white'
-            "
-          />
+        <button aria-label="Toggle menu" class="md:hidden flex flex-col gap-1 cursor-pointer z-50" type="button"
+          :aria-expanded="menuOpen" @click="menuOpen = !menuOpen">
+          <span class="w-6 h-0.5 transition-transform" :class="menuOpen ? '-rotate-45 translate-y-1.5 bg-white' : 'bg-white'
+            " />
+          <span class="w-6 h-0.5 bg-white transition-opacity" :class="{ 'opacity-0': menuOpen }" />
+          <span class="w-6 h-0.5 transition-transform" :class="menuOpen ? 'rotate-45 -translate-y-1.5 bg-white' : 'bg-white'
+            " />
         </button>
       </div>
     </div>
 
     <ul
       class="md:hidden fixed w-full h-screen left-0 right-0 bottom-0 top-16 bg-white flex flex-col items-center pt-12 gap-5 shadow-lg transform transition-transform duration-300 z-40 overflow-y-auto"
-      :class="
-        menuOpen
-          ? 'translate-x-0 pointer-events-auto'
-          : '-translate-x-full pointer-events-none'
-      "
-      :aria-hidden="!menuOpen"
-    >
+      :class="menuOpen
+        ? 'translate-x-0 pointer-events-auto'
+        : '-translate-x-full pointer-events-none'
+        " :aria-hidden="!menuOpen">
       <li v-for="item in navItems" :key="`${item.to}-mobile`">
-        <NuxtLink
-          class="text-gray-900 text-lg"
-          :to="item.to"
-          @click="closeMenu"
-        >
+        <NuxtLink class="text-gray-900 text-lg" :to="item.to" @click="closeMenu">
           {{ item.label }}
         </NuxtLink>
       </li>
       <li v-if="!session.data">
-        <button
-          class="text-gray-900 text-lg"
-          @click="
-            signIn.social({ provider: 'google' });
-            closeMenu();
-          "
-        >
+        <button class="text-gray-900 text-lg" @click="
+          signIn.social({ provider: 'google' });
+        closeMenu();
+        ">
           Sign In
         </button>
       </li>
       <li v-else class="flex flex-col items-center gap-2">
-        <img
-          v-if="session.data.user.image"
-          :src="session.data.user.image"
-          class="w-10 h-10 rounded-full"
-        />
+        <img v-if="session.data.user.image" :src="session.data.user.image" class="w-10 h-10 rounded-full" />
         <span class="text-gray-900 font-bold">{{
           session.data.user.name
         }}</span>
-        <button
-          class="text-gray-900 text-lg"
-          @click="
-            signOut();
-            closeMenu();
-          "
-        >
+        <button class="text-gray-900 text-lg" @click="
+          signOut();
+        closeMenu();
+        ">
           Sign Out
         </button>
       </li>
       <li class="flex gap-3 pt-4">
-        <button
-          v-for="option in languageOptions"
-          :key="`${option.code}-mobile`"
-          type="button"
-          :class="languageButtonClasses(option.code, 'light')"
-          @click="setLanguage(option.code)"
-        >
+        <button v-for="option in languageOptions" :key="`${option.code}-mobile`" type="button"
+          :class="languageButtonClasses(option.code, 'light')" @click="setLanguage(option.code)">
           {{ t(option.labelKey) }}
         </button>
       </li>
@@ -184,11 +128,6 @@ const navItems = computed(() => [
     to: "/submission",
     label: t("nav.submit"),
     active: route.path.startsWith("/submission"),
-  },
-  {
-    to: "/judges",
-    label: t("nav.judges"),
-    active: route.path.startsWith("/judges"),
   },
   {
     to: "/videos",
@@ -236,11 +175,10 @@ const isTransparent = computed(() => isHome.value && !hasScrolled.value);
 const navClasses = computed(() => {
   const base =
     "fixed left-0 right-0 top-0 z-40 transition-colors duration-300 border-b";
-  return `${base} ${
-    isTransparent.value
-      ? "bg-transparent border-transparent shadow-none"
-      : "bg-primary/70 border-white/10 shadow backdrop-blur-md"
-  }`;
+  return `${base} ${isTransparent.value
+    ? "bg-transparent border-transparent shadow-none"
+    : "bg-primary/70 border-white/10 shadow backdrop-blur-md"
+    }`;
 });
 
 function updateScrollState() {

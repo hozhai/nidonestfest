@@ -38,6 +38,41 @@
             <p>{{ t('about.about_nido_pending') }}</p>
           </div>
         </div>
+
+        <div id="judges" class="bg-white p-8 rounded-lg shadow-[8px_8px_0_rgba(0,0,0,0.3)] scroll-mt-28">
+          <h3 class="text-2xl font-semibold mb-6 text-accent">{{ t('judges.title') }}</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-[8px_8px_0_rgba(0,0,0,0.15)]">
+              <div class="w-20 h-20 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto mb-3">
+                <Icon name="line-md:account" class="text-3xl text-accent" />
+              </div>
+              <h4 class="text-center font-semibold">David Gran</h4>
+              <div class="mt-3 rounded-lg bg-[#f8f9fa] p-4">
+                <p class="text-sm text-[#333]">
+                  David Gran has been teaching Film for over 20 years. He has worked on the development of the
+                  official IB Curriculum, he's been a film examiner, and is the author of InThinking's DP Film page.
+                  He began teaching film to middle school students in Harlem, and has taught high school level film
+                  classes in New York, Shanghai and now in Santiago at the International School Nido de Aguilas. Next
+                  year he will be moving to Thailand to teach at the International School of Bangkok. His favorite
+                  film is Three Idiots and insists it's a better film than you might think from hearing the title.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-[8px_8px_0_rgba(0,0,0,0.15)]">
+              <div class="w-20 h-20 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto mb-3">
+                <Icon name="line-md:account" class="text-3xl text-accent" />
+              </div>
+              <h4 class="text-center font-semibold">Jonas Hekel</h4>
+              <div class="mt-3 rounded-lg bg-[#f8f9fa] p-4">
+                <p class="text-sm text-[#333]">
+                  Jonas Hekel is a working filmmaker and Nido de Aguilas alumni. His work includes advertising for
+                  the US Government, freelance creative filmmaking, and directing production at his church.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
