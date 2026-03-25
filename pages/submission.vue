@@ -541,9 +541,16 @@ watch(session, async (newVal) => {
 });
 
 watch(
-  () => [...formData.value.prizeCategories],
+  () => formData.value.prizeCategories,
   (newValue) => {
-    formData.value.prizeCategories = sortPrizeSelection(newValue);
+    const sorted = sortPrizeSelection(newValue);
+    const hasChanged =
+      sorted.length !== newValue.length ||
+      sorted.some((value, index) => value !== newValue[index]);
+
+    if (hasChanged) {
+      formData.value.prizeCategories = sorted;
+    }
   },
   { deep: true }
 );
