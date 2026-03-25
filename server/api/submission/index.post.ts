@@ -92,7 +92,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const primaryPrizeKey = submittedPrizeKeys[0] || null;
   const serializedPrizeCategories = JSON.stringify(submittedPrizeKeys);
 
   const db = getDatabase();
@@ -101,18 +100,17 @@ export default defineEventHandler(async (event) => {
     if (db instanceof Pool) {
       const query = `
         INSERT INTO submissions (
-          user_id, prize_category, prize_categories,
+          user_id, prize_categories,
           full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
           country, past_screenings, additional_info, updated_at
         ) VALUES (
-          $1, $2, $3,
-          $4, $5, $6, $7, $8, $9,
-          $10, $11, $12, $13, $14,
-          $15, $16, $17, NOW()
+          $1, $2,
+          $3, $4, $5, $6, $7, $8,
+          $9, $10, $11, $12, $13,
+          $14, $15, $16, NOW()
         )
         ON CONFLICT (user_id) DO UPDATE SET
-          prize_category = EXCLUDED.prize_category,
           prize_categories = EXCLUDED.prize_categories,
           full_name = EXCLUDED.full_name,
           social_link = EXCLUDED.social_link,
@@ -134,7 +132,6 @@ export default defineEventHandler(async (event) => {
 
       const values = [
         userId,
-        primaryPrizeKey,
         serializedPrizeCategories,
         fullName,
         socialLink || null,
@@ -159,18 +156,17 @@ export default defineEventHandler(async (event) => {
     if (db instanceof Database) {
       const query = `
         INSERT INTO submissions (
-          user_id, prize_category, prize_categories,
+          user_id, prize_categories,
           full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
           country, past_screenings, additional_info, updated_at
         ) VALUES (
-          ?, ?, ?,
+          ?, ?,
           ?, ?, ?, ?, ?, ?,
           ?, ?, ?, ?, ?,
           ?, ?, ?, CURRENT_TIMESTAMP
         )
         ON CONFLICT(user_id) DO UPDATE SET
-          prize_category = excluded.prize_category,
           prize_categories = excluded.prize_categories,
           full_name = excluded.full_name,
           social_link = excluded.social_link,
@@ -192,7 +188,6 @@ export default defineEventHandler(async (event) => {
       const stmt = db.prepare(query);
       stmt.run(
         userId,
-        primaryPrizeKey,
         serializedPrizeCategories,
         fullName,
         socialLink || null,
