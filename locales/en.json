@@ -47,6 +47,7 @@
     "mission_title": "Mission Statement",
     "mission_text": "The Nido Film Festival is dedicated to showcasing innovative short films from emerging filmmakers worldwide. We provide a platform for creative voices to be heard and celebrated, fostering a community of artists who push the boundaries of storytelling through film.",
     "info_title": "Festival Information",
+    "info_paragraph": "2026 marks the first year of NestFest! NestFest takes participants from all levels of education all over Latin America, hoping to create an intergenerational celebration of talent and art. Selected short films (3-10 minutes) will be screened live at Nido on April 30th, while also being streamed online. Selectees will be reached out with invitations to Nido for the event. The festival features an award ceremony, food and speeches from the judges. Submitting to NestFest is absolutely free and a great opportunity for upcoming filmmakers to get publicity and recognition for their achievements.",
     "info": {
       "duration_title": "Film Duration",
       "duration_value": "3-25 minutes",
@@ -58,11 +59,19 @@
       "year_value": "First Annual Festival - Grand Opening!"
     },
     "about_nido_title": "About Nido",
-    "about_nido_pending": "Information about Nido coming soon..."
+    "about_nido": "Nido de Águilas is a private school in Santiago Chile. Founded by Waldo Stevenson in 1934, Nido empowers learners to connect authentically, explore with curiosity, and act with purpose. It offers a profound film education, with courses in digital filmmaking, stagecraft, and IB Film."
   },
   "judges": {
     "title": "Meet the Judges",
-    "pending": "Judge information coming soon..."
+    "pending": "Judge information coming soon...",
+    "david_gran": {
+      "name": "David Gran",
+      "description": "David Gran has been teaching Film for over 20 years. He has worked on the development of the official IB Curriculum, he's been a film examiner, and is the author of InThinking's DP Film page. He began teaching film to middle school students in Harlem, and has taught high school level film classes in New York, Shanghai and now in Santiago at the International School Nido de Aguilas. Next year he will be moving to Thailand to teach at the International School of Bangkok. His favorite film is Three Idiots and insists it's a better film than you might think from hearing the title."
+    },
+    "jonas_hekel": {
+      "name": "Jonas Hekel",
+      "description": "Jonas Hekel is a working filmmaker and Nido de Aguilas alumni. His work includes advertising for the US Government, freelance creative filmmaking, and directing production at his church."
+    }
   },
   "submission": {
     "title": "Submit Your Film",

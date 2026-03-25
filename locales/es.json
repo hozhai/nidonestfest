@@ -46,6 +46,7 @@
     "mission_title": "Declaración de Misión",
     "mission_text": "El Festival de Cine Nido está dedicado a mostrar películas cortas innovadoras de cineastas emergentes de todo el mundo. Proporcionamos una plataforma para que las voces creativas sean escuchadas y celebradas, fomentando una comunidad de artistas que empujan los límites de la narración a través del cine.",
     "info_title": "Información del Festival",
+    "info_paragraph": "¡2026 marca el primer año de NestFest! NestFest reúne participantes de todos los niveles educativos de toda Latinoamérica, con la esperanza de crear una celebración intergeneracional del talento y el arte. Los cortometrajes seleccionados (3-10 minutos) se proyectarán en vivo en Nido el 30 de abril y también se transmitirán en línea. Las personas seleccionadas recibirán invitaciones para asistir al evento en Nido. El festival incluye una ceremonia de premios, comida y discursos de los jueces. Postular a NestFest es completamente gratis y una gran oportunidad para que cineastas emergentes obtengan difusión y reconocimiento por sus logros.",
     "info": {
       "duration_title": "Duración de Películas",
       "duration_value": "3-25 minutos",
@@ -57,11 +58,19 @@
       "year_value": "¡Primer Festival Anual - Gran Apertura!"
     },
     "about_nido_title": "Sobre Nido",
-    "about_nido_pending": "Información sobre Nido próximamente..."
+    "about_nido": "Nido de Águilas es un colegio privado en Santiago de Chile. Fundado por Waldo Stevenson en 1934, Nido empodera a los estudiantes para conectarse de forma auténtica, explorar con curiosidad y actuar con propósito. Ofrece una educación cinematográfica profunda, con cursos de cine digital, artes escénicas y Cine IB."
   },
   "judges": {
     "title": "Conoce a los Jueces",
-    "pending": "Información del juez próximamente..."
+    "pending": "Información del juez próximamente...",
+    "david_gran": {
+      "name": "David Gran",
+      "description": "David Gran ha enseñado Cine durante más de 20 años. Ha trabajado en el desarrollo del currículo oficial del IB, ha sido evaluador de cine y es autor de la página de Cine del DP de InThinking. Comenzó enseñando cine a estudiantes de enseñanza media en Harlem, y ha impartido clases de cine de nivel secundaria en Nueva York, Shanghái y ahora en Santiago, en el Colegio Internacional Nido de Águilas. El próximo año se mudará a Tailandia para enseñar en el International School of Bangkok. Su película favorita es Three Idiots y asegura que es mejor de lo que uno podría pensar al escuchar el título."
+    },
+    "jonas_hekel": {
+      "name": "Jonas Hekel",
+      "description": "Jonas Hekel es un cineasta en ejercicio y exalumno de Nido de Águilas. Su trabajo incluye publicidad para el Gobierno de Estados Unidos, realización audiovisual creativa como freelance y dirección de producción en su iglesia."
+    }
   },
   "submission": {
     "title": "Envía tu película",

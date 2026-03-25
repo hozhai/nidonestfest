@@ -87,7 +87,7 @@ const countdown = reactive({
   seconds: 0
 });
 
-const targetDate = new Date('2026-04-01T00:00:00').getTime();
+const targetDate = new Date('2026-04-30T00:00:00').getTime();
 let intervalId: number | undefined;
 
 function updateCountdown() {

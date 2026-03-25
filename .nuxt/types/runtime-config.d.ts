@@ -16,10 +16,6 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
       clientSecret: string,
    },
 
-   payments: {
-      allowTestMode: boolean,
-   },
-
    nitro: {
       envPrefix: string,
    },
@@ -29,8 +25,6 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
    },
   }
   interface SharedPublicRuntimeConfig {
-   enablePaymentTestMode: boolean,
-
    vgsap: any,
   }
 declare module '@nuxt/schema' {
