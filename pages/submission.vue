@@ -62,9 +62,16 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                     <div><span class="text-gray-500">Email:</span> {{ selectedSubmission.email }}</div>
                     <div v-if="selectedSubmission.social_link">
-                      <span class="text-gray-500">Social:</span>
+                      <span class="text-gray-500">Social: </span>
                       <a :href="selectedSubmission.social_link" target="_blank" class="text-blue-600 hover:underline">
                         {{ selectedSubmission.social_link }}
+                      </a>
+                    </div>
+                    <div v-if="selectedSubmission.file_link" class="sm:col-span-2">
+                      <span class="text-gray-500">File Link: </span>
+                      <a :href="selectedSubmission.file_link" target="_blank" rel="noopener noreferrer"
+                        class="text-blue-600 hover:underline break-all">
+                        {{ selectedSubmission.file_link }}
                       </a>
                     </div>
                     <div v-if="selectedSubmission.prize_categories || selectedSubmission.prize_category">
@@ -162,6 +169,12 @@
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
 
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.fileLink') }}</label>
+              <input v-model="formData.fileLink" type="url" placeholder="https://..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
+            </div>
+
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.filmName') }}</label>
               <input v-model="formData.filmName" type="text" required
@@ -207,7 +220,7 @@
 
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.productionDates')
-                }}</label>
+              }}</label>
               <input v-model="formData.productionDates" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -220,7 +233,7 @@
 
             <div class="col-span-1">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.shootingFormat')
-                }}</label>
+              }}</label>
               <input v-model="formData.shootingFormat" type="text" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition" />
             </div>
@@ -245,14 +258,14 @@
 
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.pastScreenings')
-                }}</label>
+              }}</label>
               <textarea v-model="formData.pastScreenings" rows="3" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
 
             <div class="col-span-1 md:col-span-2">
               <label class="block text-sm font-medium text-gray-700 mb-1">{{ t('submission.form.additionalInfo')
-                }}</label>
+              }}</label>
               <textarea v-model="formData.additionalInfo" rows="3"
                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary outline-none transition"></textarea>
             </div>
@@ -267,7 +280,7 @@
                   {{ t('submission.form.termsLabel') }}
                   <a href="/tc" target="_blank" class="text-primary underline hover:text-primary/80">{{
                     t('submission.form.termsLink')
-                    }}</a>.
+                  }}</a>.
                 </p>
               </div>
             </label>
@@ -317,6 +330,7 @@ import { PRIZE_OPTIONS } from '~/lib/prizes';
 type SubmissionForm = {
   fullName: string;
   socialLink: string;
+  fileLink: string;
   filmName: string;
   synopsis: string;
   genre: string;
@@ -335,6 +349,7 @@ type SubmissionForm = {
 const initialForm: SubmissionForm = {
   fullName: '',
   socialLink: '',
+  fileLink: '',
   filmName: '',
   synopsis: '',
   genre: '',
@@ -447,6 +462,7 @@ const fetchSubmission = async () => {
       formData.value = {
         fullName: data.full_name,
         socialLink: data.social_link || '',
+        fileLink: data.file_link || '',
         filmName: data.film_name,
         synopsis: data.synopsis,
         genre: data.genre,

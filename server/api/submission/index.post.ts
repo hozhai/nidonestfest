@@ -62,6 +62,7 @@ export default defineEventHandler(async (event) => {
   const {
     fullName,
     socialLink,
+    fileLink,
     filmName,
     synopsis,
     genre,
@@ -103,12 +104,12 @@ export default defineEventHandler(async (event) => {
           user_id, prize_categories,
           full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
-          country, past_screenings, additional_info, updated_at
+          country, past_screenings, additional_info, file_link, updated_at
         ) VALUES (
           $1, $2,
           $3, $4, $5, $6, $7, $8,
           $9, $10, $11, $12, $13,
-          $14, $15, $16, NOW()
+          $14, $15, $16, $17, NOW()
         )
         ON CONFLICT (user_id) DO UPDATE SET
           prize_categories = EXCLUDED.prize_categories,
@@ -126,6 +127,7 @@ export default defineEventHandler(async (event) => {
           country = EXCLUDED.country,
           past_screenings = EXCLUDED.past_screenings,
           additional_info = EXCLUDED.additional_info,
+          file_link = EXCLUDED.file_link,
           updated_at = NOW()
         RETURNING *;
       `;
@@ -147,6 +149,7 @@ export default defineEventHandler(async (event) => {
         country,
         pastScreenings,
         additionalInfo || null,
+        fileLink || null,
       ];
 
       const result = await db.query(query, values);
@@ -159,12 +162,12 @@ export default defineEventHandler(async (event) => {
           user_id, prize_categories,
           full_name, social_link, film_name, synopsis, genre, runtime,
           production_dates, budget, shooting_format, aspect_ratio, language,
-          country, past_screenings, additional_info, updated_at
+          country, past_screenings, additional_info, file_link, updated_at
         ) VALUES (
           ?, ?,
           ?, ?, ?, ?, ?, ?,
           ?, ?, ?, ?, ?,
-          ?, ?, ?, CURRENT_TIMESTAMP
+          ?, ?, ?, ?, CURRENT_TIMESTAMP
         )
         ON CONFLICT(user_id) DO UPDATE SET
           prize_categories = excluded.prize_categories,
@@ -182,6 +185,7 @@ export default defineEventHandler(async (event) => {
           country = excluded.country,
           past_screenings = excluded.past_screenings,
           additional_info = excluded.additional_info,
+            file_link = excluded.file_link,
           updated_at = CURRENT_TIMESTAMP
       `;
 
@@ -203,6 +207,7 @@ export default defineEventHandler(async (event) => {
         country,
         pastScreenings,
         additionalInfo || null,
+        fileLink || null,
       );
 
       const getStmt = db.prepare("SELECT * FROM submissions WHERE user_id = ?");

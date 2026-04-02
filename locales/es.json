@@ -79,6 +79,7 @@
     "form": {
       "fullName": "¿Cuál es tu nombre completo?*",
       "socialLink": "Redes sociales o sitio web (si aplica)",
+      "fileLink": "Enlace del archivo (Google Drive, Dropbox, YouTube no listado, etc.)",
       "filmName": "Nombre de tu película*",
       "synopsis": "Pequeña sinopsis de tu película*",
       "genre": "Género de la película*",

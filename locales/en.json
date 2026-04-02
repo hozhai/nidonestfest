@@ -80,6 +80,7 @@
     "form": {
       "fullName": "What's your full name?*",
       "socialLink": "Social media or website (if applicable)",
+      "fileLink": "File link (Google Drive, Dropbox, YouTube unlisted, etc.)",
       "filmName": "Name of your film*",
       "synopsis": "Small synopsis of your film*",
       "genre": "Genre of film*",

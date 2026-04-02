@@ -25,6 +25,7 @@ export default defineNitroPlugin(async (nitroApp) => {
       country TEXT NOT NULL,
       past_screenings TEXT NOT NULL,
       additional_info TEXT,
+      file_link TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
@@ -50,6 +51,7 @@ export default defineNitroPlugin(async (nitroApp) => {
       country TEXT NOT NULL,
       past_screenings TEXT NOT NULL,
       additional_info TEXT,
+      file_link TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
@@ -57,6 +59,7 @@ export default defineNitroPlugin(async (nitroApp) => {
 
   const alterTableSQLPostgres = [
     "ALTER TABLE submissions ADD COLUMN IF NOT EXISTS prize_categories TEXT",
+    "ALTER TABLE submissions ADD COLUMN IF NOT EXISTS file_link TEXT",
   ];
 
   const ensureSQLiteColumn = (
@@ -84,6 +87,7 @@ export default defineNitroPlugin(async (nitroApp) => {
     } else if (db instanceof Database) {
       db.prepare(createTableSQLSQLite).run();
       ensureSQLiteColumn(db, "prize_categories", "TEXT");
+      ensureSQLiteColumn(db, "file_link", "TEXT");
       console.log("SQLite: 'submissions' table checked/created.");
     }
   } catch (error) {
